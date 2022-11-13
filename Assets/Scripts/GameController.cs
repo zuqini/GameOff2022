@@ -23,7 +23,4 @@ public class GameController : MonoBehaviour
 
         SharedInstance = this;
     }
-
-    void FixedUpdate() {
-    }
 }
