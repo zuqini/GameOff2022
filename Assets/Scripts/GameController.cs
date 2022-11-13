@@ -6,8 +6,12 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public static GameController SharedInstance;
+    public LevelLoader levelLoader;
+    public DialogueManager dialogueManager;
+    public DialogueTrigger dialogueTrigger;
 
     void Start() {
+        dialogueTrigger.TriggerDialogue(0);
     }
 
     void Awake() {
