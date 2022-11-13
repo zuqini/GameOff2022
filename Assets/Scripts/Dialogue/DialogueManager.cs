@@ -6,6 +6,7 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public CanvasGroup dialogueBox;
     public TMP_Text nameText;
     public TMP_Text dialogueText;
 
@@ -21,15 +22,21 @@ public class DialogueManager : MonoBehaviour
         this.dialogue = dialogue;
         dialogueIndex = 0;
         sentenceIndex = 0;
+        dialogueBox.alpha = 1;
 
         // bring up dialogue box
         DisplayNextDialogue();
     }
 
     public void DisplayNextDialogue() {
+        if (dialogue == null) {
+            return;
+        }
         if (dialogueIndex >= dialogue.Count) {
             EndDialogue();
+            return;
         }
+
         var speaker = dialogue[dialogueIndex];
         if (sentenceIndex >= speaker.sentences.Length) {
             sentenceIndex = 0;
@@ -44,8 +51,10 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void EndDialogue() {
+        dialogue = null;
         dialogueIndex = 0;
         sentenceIndex = 0;
+        dialogueBox.alpha = 0;
         // bring down dialogue box
     }
 }

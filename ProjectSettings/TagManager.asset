@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2231549127
+    locked: 0
+  - name: BackgroundDecoration
+    uniqueID: 836751565
+    locked: 0
+  - name: Customers
+    uniqueID: 3458938883
+    locked: 0
+  - name: Table
+    uniqueID: 1232999231
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
