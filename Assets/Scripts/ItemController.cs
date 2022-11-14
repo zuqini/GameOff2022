@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class ItemController : MonoBehaviour
 {
-    public Camera myCam;
+    private Rigidbody2D rb;
+    private Vector3 targetPosition;
+    private Vector3 currentVelocity;
+
+    private bool isDragging = false;
 
     private float startXPos;
     private float startYPos;
 
-    private bool isDragging = false;
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
-    private void Update()
+    void Update()
     {
         if (isDragging)
         {
@@ -19,19 +26,25 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        if (!isDragging)
+        {
+            return;
+        }
+
+        rb.MovePosition(targetPosition);
+    }
+
     void OnMouseDown()
     {
         Vector3 mousePos = Input.mousePosition;
 
-        if (!myCam.orthographic)
-        {
-            mousePos.z = 10;
-        }
+        mousePos = Utils.GetWorldPositionOnPlane(mousePos, transform.position.z);
 
-        mousePos = myCam.ScreenToWorldPoint(mousePos);
-
-        startXPos = mousePos.x - transform.localPosition.x;
-        startYPos = mousePos.y - transform.localPosition.y;
+        startXPos = mousePos.x - transform.position.x;
+        startYPos = mousePos.y - transform.position.y;
+        targetPosition = GetTargetPosition(mousePos);
 
         isDragging = true;
     }
@@ -39,18 +52,21 @@ public class ItemController : MonoBehaviour
     void OnMouseUp()
     {
         isDragging = false;
+        rb.velocity = new Vector3(currentVelocity.x, currentVelocity.y, currentVelocity.z) * 20;
+        currentVelocity = Vector3.zero;
     }
 
     public void DragObject()
     {
         Vector3 mousePos = Input.mousePosition;
 
-        if(!myCam.orthographic)
-        {
-            mousePos.z = 10;
-        }
+        mousePos = Utils.GetWorldPositionOnPlane(mousePos, transform.position.z);
+        targetPosition = GetTargetPosition(mousePos);
+        currentVelocity = targetPosition - transform.position;
+    }
 
-        mousePos = myCam.ScreenToWorldPoint(mousePos);
-        transform.localPosition = new Vector3(mousePos.x - startXPos, mousePos.y - startYPos, transform.localPosition.z);
+    private Vector3 GetTargetPosition(Vector3 mousePos)
+    {
+        return new Vector3(mousePos.x - startXPos, mousePos.y - startYPos, transform.position.z);
     }
 }

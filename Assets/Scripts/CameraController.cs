@@ -12,15 +12,19 @@ public class CameraController : MonoBehaviour
     private CinemachineVirtualCamera vcam;
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         horizontal = Input.GetAxisRaw("Horizontal");
         vcam = GetComponent<CinemachineVirtualCamera>();
     }
 
-    void FixedUpdate() {
-        if (horizontal > 0) {
+    void FixedUpdate()
+    {
+        if (horizontal > 0)
+        {
             vcam.Follow = brewTarget;
-        } else if (horizontal < 0) {
+        } else if (horizontal < 0)
+        {
             vcam.Follow = serveTarget;
         }
     }

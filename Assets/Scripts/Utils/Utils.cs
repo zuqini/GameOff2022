@@ -21,7 +21,8 @@ public static class Utils
         }
     }
 
-    private static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z = 0) {
+    public static Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z = 0)
+    {
         Ray ray = Camera.main.ScreenPointToRay(screenPosition);
         Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
         float distance;

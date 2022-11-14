@@ -10,11 +10,13 @@ public class GameController : MonoBehaviour
     public DialogueManager dialogueManager;
     public DialogueTrigger dialogueTrigger;
 
-    void Start() {
+    void Start()
+    {
         dialogueTrigger.TriggerDialogue(0);
     }
 
-    void Awake() {
+    void Awake()
+    {
         if (SharedInstance != null && SharedInstance != this)
         {
             Destroy(this.gameObject);

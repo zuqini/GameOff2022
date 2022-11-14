@@ -15,10 +15,12 @@ public class DialogueManager : MonoBehaviour
     private int sentenceIndex = 0;
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
     }
 
-    public void StartDialogue(List<Dialogue> dialogue) {
+    public void StartDialogue(List<Dialogue> dialogue)
+    {
         this.dialogue = dialogue;
         dialogueIndex = 0;
         sentenceIndex = 0;
@@ -28,17 +30,21 @@ public class DialogueManager : MonoBehaviour
         DisplayNextDialogue();
     }
 
-    public void DisplayNextDialogue() {
-        if (dialogue == null) {
+    public void DisplayNextDialogue()
+    {
+        if (dialogue == null)
+        {
             return;
         }
-        if (dialogueIndex >= dialogue.Count) {
+        if (dialogueIndex >= dialogue.Count)
+        {
             EndDialogue();
             return;
         }
 
         var speaker = dialogue[dialogueIndex];
-        if (sentenceIndex >= speaker.sentences.Length) {
+        if (sentenceIndex >= speaker.sentences.Length)
+        {
             sentenceIndex = 0;
             dialogueIndex++;
             DisplayNextDialogue();
@@ -50,7 +56,8 @@ public class DialogueManager : MonoBehaviour
         dialogueText.SetText(sentence);
     }
 
-    public void EndDialogue() {
+    public void EndDialogue()
+    {
         dialogue = null;
         dialogueIndex = 0;
         sentenceIndex = 0;
