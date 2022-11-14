@@ -21,7 +21,6 @@ public class ItemController : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("lol");
         Vector3 mousePos = Input.mousePosition;
 
         if (!myCam.orthographic)
