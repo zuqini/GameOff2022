@@ -25,4 +25,16 @@ public class GameController : MonoBehaviour
 
         SharedInstance = this;
     }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Vector3 mousePos = Input.mousePosition;
+            {
+                var position = Utils.GetWorldPositionOnPlane(mousePos, 0);
+                Debug.Log(position.x + ", " + position.y);
+            }
+        }
+    }
 }

@@ -7,11 +7,11 @@ public class ItemController : MonoBehaviour
     private Rigidbody2D rb;
     private Vector3 targetPosition;
     private Vector3 currentVelocity;
-
-    private bool isDragging = false;
-
     private float startXPos;
     private float startYPos;
+    private bool isDragging = false;
+
+    public bool IsDragging { get => isDragging; }
 
     void Start()
     {
@@ -20,7 +20,7 @@ public class ItemController : MonoBehaviour
 
     void Update()
     {
-        if (isDragging)
+        if (IsDragging)
         {
             DragObject();
         }
@@ -28,7 +28,7 @@ public class ItemController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!isDragging)
+        if (!IsDragging)
         {
             return;
         }
@@ -56,7 +56,7 @@ public class ItemController : MonoBehaviour
         currentVelocity = Vector3.zero;
     }
 
-    public void DragObject()
+    private void DragObject()
     {
         Vector3 mousePos = Input.mousePosition;
 
