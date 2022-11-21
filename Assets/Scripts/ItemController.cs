@@ -38,6 +38,7 @@ public class ItemController : MonoBehaviour
 
     void OnMouseDown()
     {
+        isDragging = true;
         Vector3 mousePos = Input.mousePosition;
 
         mousePos = Utils.GetWorldPositionOnPlane(mousePos, transform.position.z);
@@ -45,8 +46,6 @@ public class ItemController : MonoBehaviour
         startXPos = mousePos.x - transform.position.x;
         startYPos = mousePos.y - transform.position.y;
         targetPosition = GetTargetPosition(mousePos);
-
-        isDragging = true;
     }
 
     void OnMouseUp()

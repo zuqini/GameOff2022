@@ -12,7 +12,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        dialogueTrigger.TriggerDialogue(0);
+        // dialogueTrigger.TriggerDialogue(0);
     }
 
     void Awake()
