@@ -15,7 +15,6 @@ public class Draggable : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -28,12 +27,12 @@ public class Draggable : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!IsDragging)
+        if (IsDragging)
         {
-            return;
+            rb.MovePosition(targetPosition);
         }
 
-        rb.MovePosition(targetPosition);
+        transform.position = rb.position;
     }
 
     void OnMouseDown()

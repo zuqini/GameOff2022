@@ -5,21 +5,30 @@ using UnityEngine;
 public class KettleController : MonoBehaviour
 {
     public Transform cup;
+    public Transform water;
+    public Transform waterMarkers;
     public float cupProximity = 8;
     public int pourAngle = 60;
     public float lerpDuration = 1000;
 
     private Rigidbody2D rb;
     private Draggable draggable;
+    private Transform waterTop;
+    private Transform waterBot;
+
     private float startAngle;
     private float targetAngle;
     private float timeElapsed = Mathf.Infinity;
-    private bool isRotated = false;
+    private bool isPouring = false;
+    private float waterLevel = 100;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         draggable = GetComponent<Draggable>();
+        // maybe refactor this
+        waterTop = waterMarkers.Find("WaterTop");
+        waterBot = waterMarkers.Find("WaterBot");
     }
 
     void Update()
@@ -31,20 +40,30 @@ public class KettleController : MonoBehaviour
         } else {
             rb.SetRotation(targetAngle);
         }
+        waterMarkers.transform.position = transform.position;
+        water.transform.position = new Vector3(
+                transform.position.x,
+                waterTop.position.y - (100 - waterLevel) * (waterTop.position.y - waterBot.position.y),
+                transform.position.z);
     }
 
     void FixedUpdate()
     {
-        var shouldRotate = Mathf.Abs(cup.position.x - transform.position.x) <= cupProximity && draggable.IsDragging;
-        if (shouldRotate && !isRotated)
+        var shouldPour = Mathf.Abs(cup.position.x - transform.position.x) <= cupProximity && draggable.IsDragging;
+        if (shouldPour && !isPouring)
         {
-            isRotated = true;
+            isPouring = true;
             setTargetRotation(pourAngle);
         }
-        else if (!shouldRotate && isRotated)
+        else if (!shouldPour && isPouring)
         {
-            isRotated = false;
+            isPouring = false;
             setTargetRotation(0);
+        }
+
+        if (isPouring)
+        {
+            waterLevel = Mathf.Max(0f, waterLevel - Time.deltaTime);
         }
     }
 
