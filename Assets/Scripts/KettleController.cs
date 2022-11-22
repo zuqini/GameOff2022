@@ -10,6 +10,7 @@ public class KettleController : MonoBehaviour
     public float cupProximity = 8;
     public int pourAngle = 60;
     public float lerpDuration = 1000;
+    public float waterDrainTimeInSec = 5;
 
     private Rigidbody2D rb;
     private Draggable draggable;
@@ -19,8 +20,8 @@ public class KettleController : MonoBehaviour
     private float startAngle;
     private float targetAngle;
     private float timeElapsed = Mathf.Infinity;
-    private bool isPouring = false;
-    private float waterLevel = 100;
+    private bool isRotating = false;
+    private float waterLevel;
 
     void Start()
     {
@@ -29,6 +30,7 @@ public class KettleController : MonoBehaviour
         // maybe refactor this
         waterTop = waterMarkers.Find("WaterTop");
         waterBot = waterMarkers.Find("WaterBot");
+        waterLevel = waterDrainTimeInSec;
     }
 
     void Update()
@@ -43,24 +45,26 @@ public class KettleController : MonoBehaviour
         waterMarkers.transform.position = transform.position;
         water.transform.position = new Vector3(
                 transform.position.x,
-                waterTop.position.y - (100 - waterLevel) * (waterTop.position.y - waterBot.position.y),
+                waterTop.position.y - (1 - waterLevel / waterDrainTimeInSec) * (waterTop.position.y - waterBot.position.y),
                 transform.position.z);
     }
 
     void FixedUpdate()
     {
-        var shouldPour = Mathf.Abs(cup.position.x - transform.position.x) <= cupProximity && draggable.IsDragging;
-        if (shouldPour && !isPouring)
+        var shouldPour = draggable.IsDragging &&
+            transform.position.x - cup.position.x <= cupProximity;
+        if (shouldPour && !isRotating)
         {
-            isPouring = true;
+            isRotating = true;
             setTargetRotation(pourAngle);
         }
-        else if (!shouldPour && isPouring)
+        else if (!shouldPour && isRotating)
         {
-            isPouring = false;
+            isRotating = false;
             setTargetRotation(0);
         }
 
+        var isPouring = isRotating && targetAngle == rb.rotation;
         if (isPouring)
         {
             waterLevel = Mathf.Max(0f, waterLevel - Time.deltaTime);
