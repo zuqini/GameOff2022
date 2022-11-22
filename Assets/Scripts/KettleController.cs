@@ -10,7 +10,7 @@ public class KettleController : MonoBehaviour
     public float lerpDuration = 1000;
 
     private Rigidbody2D rb;
-    private ItemController itemController;
+    private Draggable draggable;
     private float startAngle;
     private float targetAngle;
     private float timeElapsed = Mathf.Infinity;
@@ -19,7 +19,7 @@ public class KettleController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        itemController = GetComponent<ItemController>();
+        draggable = GetComponent<Draggable>();
     }
 
     void Update()
@@ -35,7 +35,7 @@ public class KettleController : MonoBehaviour
 
     void FixedUpdate()
     {
-        var shouldRotate = Mathf.Abs(cup.position.x - transform.position.x) <= cupProximity && itemController.IsDragging;
+        var shouldRotate = Mathf.Abs(cup.position.x - transform.position.x) <= cupProximity && draggable.IsDragging;
         if (shouldRotate && !isRotated)
         {
             isRotated = true;
