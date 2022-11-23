@@ -6,6 +6,8 @@ public class FaucetLeverController : MonoBehaviour
 {
     private Animator animator;
 
+    public KettleController kettle;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -17,9 +19,10 @@ public class FaucetLeverController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("FaucetLeverDown"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("FaucetLeverDown") &&
+                kettle.IsLatchedToBase)
         {
-            // fill water
+            kettle.FillWater(Time.deltaTime);
         }
     }
 

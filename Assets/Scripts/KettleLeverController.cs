@@ -6,6 +6,8 @@ public class KettleLeverController : MonoBehaviour
 {
     private Animator animator;
 
+    public KettleController kettle;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -19,17 +21,17 @@ public class KettleLeverController : MonoBehaviour
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("KettleLeverDown"))
         {
-            // heat water
+            if (kettle.IsLatchedToBase && !kettle.isMaxTemperature())
+            {
+                kettle.RaiseTemperature(Time.deltaTime);
+            } else {
+                animator.SetBool("IsPressed", false);
+            }
         }
     }
 
     void OnMouseDown()
     {
         animator.SetBool("IsPressed", true);
-    }
-
-    void OnMouseUp()
-    {
-        animator.SetBool("IsPressed", false);
     }
 }

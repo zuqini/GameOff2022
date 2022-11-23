@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - KettleBase
   layers:
   - Default
   - TransparentFX
@@ -52,4 +53,10 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: KettleWater
+    uniqueID: 2082372411
+    locked: 0
+  - name: Thermometer
+    uniqueID: 567484403
     locked: 0
