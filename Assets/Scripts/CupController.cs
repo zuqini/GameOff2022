@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class CupController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private float temperature;
+    private GameObject teabag;
+
     void Start()
     {
-        
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
     }
 }
