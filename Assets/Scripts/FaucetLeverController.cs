@@ -20,7 +20,7 @@ public class FaucetLeverController : MonoBehaviour
     void FixedUpdate()
     {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("FaucetLeverDown") &&
-                kettle.IsLatchedToBase)
+                kettle.IsOnKettleBase)
         {
             kettle.FillWater(Time.deltaTime);
         }

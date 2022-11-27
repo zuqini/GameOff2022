@@ -10,8 +10,10 @@ public class Draggable : MonoBehaviour
     private float startXPos;
     private float startYPos;
     private bool isDragging = false;
+    private bool isEnabled = true;
 
     public bool IsDragging { get => isDragging; }
+    public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
 
     void Start()
     {
@@ -19,6 +21,11 @@ public class Draggable : MonoBehaviour
 
     void Update()
     {
+        if (!isEnabled)
+        {
+            return;
+        }
+
         if (IsDragging)
         {
             DragObject();
@@ -27,6 +34,12 @@ public class Draggable : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isEnabled)
+        {
+            isDragging = false;
+            return;
+        }
+
         if (IsDragging)
         {
             rb.MovePosition(targetPosition);
@@ -37,6 +50,9 @@ public class Draggable : MonoBehaviour
 
     void OnMouseDown()
     {
+        if (!isEnabled) {
+            return;
+        }
         isDragging = true;
         Vector3 mousePos = Input.mousePosition;
 
@@ -50,6 +66,9 @@ public class Draggable : MonoBehaviour
     void OnMouseUp()
     {
         isDragging = false;
+        if (!isEnabled) {
+            return;
+        }
         rb.velocity = new Vector3(currentVelocity.x, currentVelocity.y, currentVelocity.z) * 20;
         currentVelocity = Vector3.zero;
     }

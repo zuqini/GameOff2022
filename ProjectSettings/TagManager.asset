@@ -6,6 +6,7 @@ TagManager:
   tags:
   - KettleBase
   - TeaBag
+  - Cup
   layers:
   - Default
   - TransparentFX

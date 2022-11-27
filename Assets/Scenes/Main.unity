@@ -3520,9 +3520,10 @@ GameObject:
   - component: {fileID: 621738699}
   - component: {fileID: 621738698}
   - component: {fileID: 621738696}
+  - component: {fileID: 621738700}
   m_Layer: 0
   m_Name: Cup
-  m_TagString: Untagged
+  m_TagString: Cup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3619,6 +3620,32 @@ Transform:
   m_Father: {fileID: 1142307605}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &621738700
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621738695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.8000001, y: 1.0002296}
+    newSize: {x: 1.8000001, y: 1.0002296}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.8000001, y: 1.0002296}
+  m_EdgeRadius: 0
 --- !u!1 &666958836
 GameObject:
   m_ObjectHideFlags: 0
@@ -3655,6 +3682,7 @@ Transform:
   - {fileID: 470077162}
   - {fileID: 1027522420}
   - {fileID: 583956320}
+  - {fileID: 1354786705}
   m_Father: {fileID: 1701621793}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4136,7 +4164,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1508403024}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &821099017
 GameObject:
@@ -4364,7 +4392,7 @@ Transform:
   m_Children:
   - {fileID: 1231119977}
   m_Father: {fileID: 1508403024}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &882856091
 BoxCollider2D:
@@ -4400,7 +4428,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882856087}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -4429,15 +4457,17 @@ MonoBehaviour:
   cup: {fileID: 621738699}
   water: {fileID: 1352090843}
   waterMarkers: {fileID: 943337250}
-  cupProximity: 5.4
+  kettleLever: {fileID: 675389707}
+  pourZone: {fileID: 1922669683}
   pourAngle: 70
-  lerpDuration: 0.4
+  rotationLerpDuration: 0.25
   waterDrainTimeInSec: 5
   waterFillRate: 1
-  latchSpeed: 10
+  latchLerpDuration: 0.5
   temperatureDecrRate: 2
-  temperatureIncrRate: 10
+  temperatureIncrRate: 80
   maxTemperature: 100
+  unlatchTemperature: 90
 --- !u!114 &882856094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4708,7 +4738,7 @@ Transform:
   - {fileID: 322869335}
   - {fileID: 1863445931}
   m_Father: {fileID: 1508403024}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &979879976
 GameObject:
@@ -7216,7 +7246,7 @@ Transform:
   m_Children:
   - {fileID: 821561366}
   m_Father: {fileID: 1508403024}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1354786704
 GameObject:
@@ -7241,15 +7271,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1354786704}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.83, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 313780693}
   - {fileID: 1212242851}
-  m_Father: {fileID: 1701621793}
-  m_RootOrder: 4
+  m_Father: {fileID: 666958837}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1372034491
 GameObject:
@@ -8144,6 +8174,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1922669681}
   - {fileID: 882856089}
   - {fileID: 1352090843}
   - {fileID: 943337250}
@@ -9255,7 +9286,6 @@ Transform:
   - {fileID: 1341962466}
   - {fileID: 579298100}
   - {fileID: 666958837}
-  - {fileID: 1354786705}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9935,6 +9965,77 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2a49e73694984b20bab93d871b69bf7, type: 3}
+--- !u!1 &1922669680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1922669681}
+  - component: {fileID: 1922669682}
+  - component: {fileID: 1922669683}
+  m_Layer: 0
+  m_Name: PourZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1922669681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922669680}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1508403024}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1922669682
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922669680}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -1.8834145, y: -1.5765929}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.17225504, y: 0.59572554}
+  m_EdgeRadius: 0
+--- !u!114 &1922669683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922669680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff5363f3c579147b29212f3112aec460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1940818425
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,11 @@ public class KettleLeverController : MonoBehaviour
 
     public KettleController kettle;
 
+    public bool IsLeverDown()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).IsName("KettleLeverDown");
+    }
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -19,9 +24,9 @@ public class KettleLeverController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("KettleLeverDown"))
+        if (IsLeverDown())
         {
-            if (kettle.IsLatchedToBase && !kettle.isMaxTemperature())
+            if (kettle.IsOnKettleBase && !kettle.IsMaxTemperature())
             {
                 kettle.RaiseTemperature(Time.deltaTime);
             } else {
