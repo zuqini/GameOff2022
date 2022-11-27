@@ -1555,7 +1555,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.004006386, y: -0.2768097}
+  m_Offset: {x: 1.6015358, y: -0.22815776}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1566,7 +1566,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.9666176, y: 1.220499}
+  m_Size: {x: 0.22039413, y: 1.3178029}
   m_EdgeRadius: 0
 --- !u!1 &339883052
 GameObject:
@@ -3521,7 +3521,7 @@ GameObject:
   - component: {fileID: 621738698}
   - component: {fileID: 621738696}
   - component: {fileID: 621738700}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cup
   m_TagString: Cup
   m_Icon: {fileID: 0}
@@ -3630,7 +3630,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4461,8 +4461,8 @@ MonoBehaviour:
   pourZone: {fileID: 1922669683}
   pourAngle: 70
   rotationLerpDuration: 0.25
-  waterDrainTimeInSec: 5
-  waterFillRate: 1
+  waterCapacityInSec: 2
+  waterFillRateInSec: 1
   latchLerpDuration: 0.5
   temperatureDecrRate: 2
   temperatureIncrRate: 80
@@ -9976,7 +9976,7 @@ GameObject:
   - component: {fileID: 1922669681}
   - component: {fileID: 1922669682}
   - component: {fileID: 1922669683}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PourZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

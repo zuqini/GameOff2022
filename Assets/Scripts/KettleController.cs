@@ -32,8 +32,8 @@ public class KettleController : MonoBehaviour
     public PourZoneController pourZone;
     public int pourAngle = 60;
     public float rotationLerpDuration = 1;
-    public float waterDrainTimeInSec = 5;
-    public float waterFillRate = 1;
+    public float waterCapacityInSec = 2;
+    public float waterFillRateInSec = 1;
     public float latchLerpDuration = 1;
     public float temperatureDecrRate = 2;
     public float temperatureIncrRate = 10;
@@ -47,7 +47,7 @@ public class KettleController : MonoBehaviour
         // maybe refactor this
         waterTop = waterMarkers.Find("WaterTop");
         waterBot = waterMarkers.Find("WaterBot");
-        waterLevel = waterDrainTimeInSec;
+        waterLevel = waterCapacityInSec;
     }
 
     void Update()
@@ -55,7 +55,7 @@ public class KettleController : MonoBehaviour
         waterMarkers.transform.position = transform.position;
         water.transform.position = new Vector3(
                 transform.position.x,
-                waterTop.position.y - (1 - waterLevel / waterDrainTimeInSec) * (waterTop.position.y - waterBot.position.y),
+                waterTop.position.y - (1 - waterLevel / waterCapacityInSec) * (waterTop.position.y - waterBot.position.y),
                 transform.position.z);
         pourZone.transform.position = transform.position;
     }
@@ -139,7 +139,7 @@ public class KettleController : MonoBehaviour
 
     public void FillWater(float dt)
     {
-        waterLevel = Mathf.Min(waterDrainTimeInSec, waterLevel + waterFillRate * dt);
+        waterLevel = Mathf.Min(waterCapacityInSec, waterLevel + waterFillRateInSec * dt);
     }
 
     public void RaiseTemperature(float dt)

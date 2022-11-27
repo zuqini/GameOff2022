@@ -15,7 +15,6 @@ public class PourZoneController : MonoBehaviour
             return;
         }
         shouldPour = true;
-        Debug.Log("lol");
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -25,6 +24,5 @@ public class PourZoneController : MonoBehaviour
             return;
         }
         shouldPour = false;
-        Debug.Log("non");
     }
 }

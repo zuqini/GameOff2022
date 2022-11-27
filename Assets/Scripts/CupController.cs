@@ -5,7 +5,9 @@ using UnityEngine;
 public class CupController : MonoBehaviour
 {
     private float temperature;
-    private GameObject teabag;
+    private float water = 0;
+
+    public float waterCapacityInSec = 0.5f;
 
     void Start()
     {
@@ -13,5 +15,10 @@ public class CupController : MonoBehaviour
 
     void Update()
     {
+    }
+
+    public void PourWater(float pouredWater)
+    {
+        water = Mathf.Min(waterCapacityInSec, water + pouredWater);
     }
 }
