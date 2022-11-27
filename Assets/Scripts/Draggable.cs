@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    public Rigidbody2D rb;
     private Vector3 targetPosition;
     private Vector3 currentVelocity;
     private float startXPos;
@@ -12,8 +11,11 @@ public class Draggable : MonoBehaviour
     private bool isDragging = false;
     private bool isEnabled = true;
     private bool shouldDiscard = false;
+    private int originalSortingLayerID;
 
-    public bool IsDragging { get => isDragging; }
+    public Rigidbody2D rb;
+    public int despawnTimeInSecAfterDisdard = 3;
+    public bool IsDragging { get => isDragging; set => isDragging = value; }
     public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
 
     void Start()
@@ -43,36 +45,38 @@ public class Draggable : MonoBehaviour
 
         if (IsDragging)
         {
+            Debug.Log("dragging");
             rb.MovePosition(targetPosition);
         }
 
         transform.position = rb.position;
     }
 
-    void OnMouseDown()
+    public void OnMouseDown()
     {
         if (!isEnabled) {
             return;
         }
+        Debug.Log("lol");
         isDragging = true;
-        Vector3 mousePos = Input.mousePosition;
-
-        mousePos = Utils.GetWorldPositionOnPlane(mousePos, transform.position.z);
+        Vector3 mousePos = Utils.GetWorldPositionOnPlane(Input.mousePosition, transform.position.z);
 
         startXPos = mousePos.x - transform.position.x;
         startYPos = mousePos.y - transform.position.y;
         targetPosition = GetTargetPosition(mousePos);
     }
 
-    void OnMouseUp()
+    public void OnMouseUp()
     {
         isDragging = false;
         if (!isEnabled) {
             return;
         }
 
+        rb.velocity = new Vector3(currentVelocity.x, currentVelocity.y, currentVelocity.z) * 20;
+        currentVelocity = Vector3.zero;
+
         if (shouldDiscard) {
-            Debug.Log("disable collider");
             var colChildren = transform.parent.gameObject.GetComponentsInChildren<Collider2D>();
             foreach (var col in colChildren)
             {
@@ -81,14 +85,30 @@ public class Draggable : MonoBehaviour
             var rendChildren = transform.parent.gameObject.GetComponentsInChildren<Renderer>();
             foreach (var rend in rendChildren)
             {
-                rend.sortingLayerID = SortingLayer.NameToID("Table");
-                rend.sortingOrder = -1;
+                // assert that every child has the same sorting layer
+                originalSortingLayerID = rend.sortingLayerID;
+                rend.sortingLayerID = SortingLayer.NameToID("BehindTable");
             }
-            // destroy object after a while
+
+            StartCoroutine(Discard());
             return;
         }
-        rb.velocity = new Vector3(currentVelocity.x, currentVelocity.y, currentVelocity.z) * 20;
-        currentVelocity = Vector3.zero;
+    }
+
+    private IEnumerator Discard() {
+        yield return new WaitForSeconds(despawnTimeInSecAfterDisdard);
+
+        transform.parent.gameObject.SetActive(false);
+        var colChildren = transform.parent.gameObject.GetComponentsInChildren<Collider2D>();
+        foreach (var col in colChildren)
+        {
+            col.enabled = true;
+        }
+        var rendChildren = transform.parent.gameObject.GetComponentsInChildren<Renderer>();
+        foreach (var rend in rendChildren)
+        {
+            rend.sortingLayerID = originalSortingLayerID;
+        }
     }
 
     private void DragObject()
@@ -113,7 +133,6 @@ public class Draggable : MonoBehaviour
         }
         other.transform.localScale = new Vector3(1.25f, 1.25f, 1);
         shouldDiscard = true;
-        Debug.Log("should discard");
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -124,6 +143,5 @@ public class Draggable : MonoBehaviour
         }
         shouldDiscard = false;
         other.transform.localScale = new Vector3(1, 1, 1);
-        Debug.Log("should not discard");
     }
 }

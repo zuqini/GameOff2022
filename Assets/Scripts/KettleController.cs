@@ -6,7 +6,6 @@ using UnityEngine;
 public class KettleController : MonoBehaviour
 {
     private Rigidbody2D rb;
-    private Draggable draggable;
     private Transform waterTop;
     private Transform waterBot;
 
@@ -24,6 +23,7 @@ public class KettleController : MonoBehaviour
     public bool IsOnKettleBase { get => isOnKettleBase; }
     public float WaterTemperature { get => waterTemperature; }
 
+    public Draggable draggable;
     public CupController cup;
     public ParticleSystem ps;
     public Transform baseLatchedPosition;
@@ -44,7 +44,6 @@ public class KettleController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        draggable = GetComponent<Draggable>();
         // maybe refactor this
         waterTop = waterMarkers.Find("WaterTop");
         waterBot = waterMarkers.Find("WaterBot");
@@ -124,7 +123,7 @@ public class KettleController : MonoBehaviour
             // Debug.Log("lprogress: " + latchTimeElapsed / latchLerpDuration);
             rb.MovePosition(targetPos);
             latchTimeElapsed += Time.deltaTime;
-        } else {
+        } else if (!draggable.IsEnabled || !draggable.IsDragging) {
             rb.MovePosition(baseLatchedPosition.position);
         }
     }

@@ -8,6 +8,7 @@ TagManager:
   - TeaBag
   - Cup
   - Discard
+  - LightTeaBag
   layers:
   - Default
   - TransparentFX
@@ -48,7 +49,7 @@ TagManager:
   - name: BackgroundDecoration
     uniqueID: 836751565
     locked: 0
-  - name: Customers
+  - name: BehindTable
     uniqueID: 3458938883
     locked: 0
   - name: Table

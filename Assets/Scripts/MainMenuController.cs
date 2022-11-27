@@ -8,13 +8,11 @@ public class MainMenuController : MonoBehaviour
     public LevelLoader levelLoader;
     public void HandleStart()
     {
-        Debug.Log("start");
         levelLoader.LoadNextLevel();
     }
 
     public void HandleQuit()
     {
-        Debug.Log("start");
         Application.Quit();
     }
 }
