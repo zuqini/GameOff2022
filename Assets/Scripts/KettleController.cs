@@ -24,8 +24,9 @@ public class KettleController : MonoBehaviour
     public bool IsOnKettleBase { get => isOnKettleBase; }
     public float WaterTemperature { get => waterTemperature; }
 
+    public CupController cup;
+    public ParticleSystem ps;
     public Transform baseLatchedPosition;
-    public Transform cup;
     public Transform water;
     public Transform waterMarkers;
     public KettleLeverController kettleLever;
@@ -64,7 +65,7 @@ public class KettleController : MonoBehaviour
     {
         waterTemperature = Mathf.Max(0, waterTemperature - temperatureDecrRate * Time.deltaTime);
 
-        var shouldPour = draggable.IsDragging && pourZone.ShouldPour;
+        var shouldPour = draggable.IsDragging && pourZone.ShouldPour && !cup.IsFullWater();
         if (shouldPour && !isRotating)
         {
             isRotating = true;
@@ -79,7 +80,9 @@ public class KettleController : MonoBehaviour
         var isPouring = isRotating && targetAngle == rb.rotation;
         if (isPouring)
         {
-            waterLevel = Mathf.Max(0f, waterLevel - Time.deltaTime);
+            var waterToPour = Mathf.Min(Time.deltaTime, waterLevel);
+            var waterPoured = cup.PourWater(waterToPour);
+            waterLevel = Mathf.Max(0f, waterLevel - waterPoured); // waterlevel should always be >= 0
         }
 
         if (!draggable.IsDragging)
@@ -90,6 +93,15 @@ public class KettleController : MonoBehaviour
                 startPos = rb.position;
                 latchTimeElapsed = 0;
             }
+        }
+
+        if (IsHot() && ps.isStopped)
+        {
+            ps.Play();
+        }
+        else if (!IsHot() && ps.isPlaying)
+        {
+            ps.Stop();
         }
 
         IterateLerp();
@@ -154,7 +166,12 @@ public class KettleController : MonoBehaviour
 
     public bool IsUnlatched()
     {
-        return !kettleLever.IsLeverDown() && waterTemperature > unlatchTemperature;
+        return !kettleLever.IsLeverDown() && IsHot();
+    }
+
+    public bool IsHot()
+    {
+        return waterTemperature > unlatchTemperature;
     }
 
     private void setTargetRotation(float target)

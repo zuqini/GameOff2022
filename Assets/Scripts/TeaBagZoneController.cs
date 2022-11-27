@@ -21,7 +21,6 @@ public class TeaBagZoneController : MonoBehaviour
             var holder = teabag.holder;
             var holderPosition = new Vector2(Mathf.Max(Mathf.Min(holder.position.x, right), left), Mathf.Max(holder.position.y, y));
             holder.MovePosition(holderPosition);
-            Debug.Log("I: " + holder.position + ", T: " + holderPosition);
         });
     }
 
