@@ -14,6 +14,10 @@ public class Draggable : MonoBehaviour
     private bool shouldDiscard = false;
 
     public Rigidbody2D rb;
+    public bool shouldStabilize = false;
+    public float stabilizationSpeed = 500f;
+    public float targetStabilizationRotation = 0f;
+    public bool shouldRotateWithItem = false;
     public bool IsDragging { get => isDragging; set => isDragging = value; }
     public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
 
@@ -48,9 +52,24 @@ public class Draggable : MonoBehaviour
         if (IsDragging)
         {
             rb.MovePosition(targetPosition);
+
+            if (shouldStabilize)
+            {
+                if (rb.rotation > targetStabilizationRotation)
+                {
+                    rb.SetRotation(Mathf.Max(targetStabilizationRotation, rb.rotation - stabilizationSpeed * Time.deltaTime));
+                }
+                else if (rb.rotation < targetStabilizationRotation) {
+                    rb.SetRotation(Mathf.Min(targetStabilizationRotation, rb.rotation + stabilizationSpeed * Time.deltaTime));
+                }
+            }
         }
 
         transform.position = rb.position;
+        if (shouldRotateWithItem)
+        {
+            transform.rotation = rb.transform.rotation;
+        }
     }
 
     public void OnMouseDown()

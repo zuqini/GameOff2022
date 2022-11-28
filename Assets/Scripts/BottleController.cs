@@ -26,13 +26,15 @@ public class BottleController : MonoBehaviour
 
     void Update()
     {
-        liquid.transform.position = transform.position;
         pourZone.transform.position = transform.position;
+        if (liquid != null)
+            liquid.transform.position = transform.position;
     }
 
     void FixedUpdate()
     {
         var shouldPour = draggable.IsDragging && pourZone.TargetCup != null && !pourZone.TargetCup.IsFullLiquid(liquidType);
+        Debug.Log(pourZone.TargetCup);
         if (shouldPour && !isRotating)
         {
             isRotating = true;
@@ -54,11 +56,13 @@ public class BottleController : MonoBehaviour
         {
             var currentAngle = Mathf.Lerp(startAngle, targetAngle, Mathfx.Hermite(0, 1, rotationTimeElapsed / rotationLerpDuration));
             rb.SetRotation(currentAngle);
-            lid.localRotation = Quaternion.AngleAxis(-currentAngle, Vector3.forward);
+            if (lid != null)
+                lid.localRotation = Quaternion.AngleAxis(-currentAngle, Vector3.forward);
             rotationTimeElapsed += Time.deltaTime;
         } else {
             rb.SetRotation(targetAngle);
-            lid.localRotation = Quaternion.AngleAxis(-targetAngle, Vector3.forward);
+            if (lid != null)
+                lid.localRotation = Quaternion.AngleAxis(-targetAngle, Vector3.forward);
         }
     }
 

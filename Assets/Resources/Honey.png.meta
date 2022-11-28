@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Honey_0
+      name: Honey_1
       rect:
         serializedVersion: 2
-        x: 153
-        y: 63
-        width: 194
-        height: 374
+        x: 81
+        y: 138
+        width: 117
+        height: 224
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,8 +118,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 345a56e9287694b469b54533db0261d6
-      internalID: 2133789174
+      spriteID: 9b34f3e6c4a4f4861bb2a8e539d5d983
+      internalID: -641112633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Honey_2
+      rect:
+        serializedVersion: 2
+        x: 286
+        y: 138
+        width: 116
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63126c6af4a8f4ad1a53d5b906daa2cb
+      internalID: -928602100
       vertices: []
       indices: 
       edges: []
@@ -135,6 +156,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Honey_2: -928602100
+      Honey_1: -641112633
       Honey_0: 2133789174
   spritePackingTag: 
   pSDRemoveMatte: 0

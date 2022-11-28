@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 4900044271594898866}
   - component: {fileID: 4900044271594898870}
   - component: {fileID: 4900044271594898871}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Cup
   m_TagString: Cup
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.06344116, y: 0.029280633}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -230,7 +230,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.8000001, y: 1.0002296}
+  m_Size: {x: 1.6731176, y: 0.77574533}
   m_EdgeRadius: 0
 --- !u!114 &4900044271594898871
 MonoBehaviour:
@@ -294,7 +294,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
-  m_Offset: {x: -0.056469798, y: 0.4149314}
+  m_Offset: {x: -0.07110989, y: 0.38213027}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -305,7 +305,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6432662, y: 0.037555397}
+  m_Size: {x: 1.7115874, y: 0.10315767}
   m_EdgeRadius: 0
 --- !u!251 &4900044271908549503
 PlatformEffector2D:
@@ -318,7 +318,7 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 3072
   m_RotationalOffset: 180
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
@@ -5349,7 +5349,7 @@ GameObject:
   - component: {fileID: 4900044272834911580}
   - component: {fileID: 4900044272834911570}
   - component: {fileID: 4900044272834911581}
-  m_Layer: 7
+  m_Layer: 1
   m_Name: Draggable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -5,14 +5,19 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField]
+    public LayerMask cameraEventMask;
+
     public static GameController SharedInstance;
     public LevelLoader levelLoader;
+    public Camera cam;
     public DialogueManager dialogueManager;
     public DialogueTrigger dialogueTrigger;
     public float despawnTimeInSecAfterDisdard = 1.5f;
 
     void Start()
     {
+        cam.eventMask = cameraEventMask;
         // dialogueTrigger.TriggerDialogue(0);
     }
 

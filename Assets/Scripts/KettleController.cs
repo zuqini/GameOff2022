@@ -78,6 +78,7 @@ public class KettleController : MonoBehaviour
         var isPouring = isRotating && targetAngle == rb.rotation;
         if (isPouring)
         {
+            Debug.Log("Pouring");
             var waterToPour = Mathf.Min(Time.deltaTime, waterLevel);
             // if isPouring is true, TargetCup cannot be null
             var waterPoured = pourZone.TargetCup.PourWater(waterToPour);

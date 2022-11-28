@@ -19,12 +19,13 @@ public class TeaBagZoneController : MonoBehaviour
         var right = teaBagConstrainer.Find("right").position.x;
         var y = teaBagConstrainer.Find("y").position.y;
         teabags.ForEach(teabag => {
-            teabag.Body.MovePosition(transform.position);
-
             var holder = teabag.holder;
-            var holderPosition = new Vector2(Mathf.Max(Mathf.Min(holder.position.x, right), left), Mathf.Max(holder.position.y, y));
+            var holderPosition = new Vector2(Mathf.Max(Mathf.Min(holder.position.x, right), left), Mathf.Max(Mathf.Min(holder.position.y, y+1), y));
+
             // ignore physics by directly setting transform
             holder.transform.position = holderPosition;
+            teabag.transform.position = transform.position;
+
             var draggable = teabag.draggable;
             draggable.IsEnabled = false;
         });
@@ -35,9 +36,6 @@ public class TeaBagZoneController : MonoBehaviour
         if (other.gameObject.tag == "TeaBag")
         {
             var teabag = other.gameObject.GetComponent<TeaBagController>();
-
-            // okay to set false, will be set to true in ItemSpawner
-            teabag.Col.enabled = false;
             teabags.Add(teabag);
         }
 
