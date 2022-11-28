@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PourZoneController : MonoBehaviour
 {
-    private bool shouldPour = false;
+    private CupController targetCup;
 
-    public bool ShouldPour { get => shouldPour; }
+    public CupController TargetCup { get => targetCup; }
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -14,7 +14,8 @@ public class PourZoneController : MonoBehaviour
         {
             return;
         }
-        shouldPour = true;
+
+        targetCup = other.GetComponent<CupController>();
     }
 
     void OnTriggerExit2D(Collider2D other)
@@ -23,6 +24,7 @@ public class PourZoneController : MonoBehaviour
         {
             return;
         }
-        shouldPour = false;
+
+        targetCup = null;
     }
 }

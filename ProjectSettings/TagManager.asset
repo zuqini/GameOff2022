@@ -9,6 +9,12 @@ TagManager:
   - Cup
   - Discard
   - LightTeaBag
+  - HerbalTeaBag
+  - BlackTeaBag
+  - TeaCup
+  - Sugar
+  - OatMilk
+  - Milk
   layers:
   - Default
   - TransparentFX
@@ -19,8 +25,8 @@ TagManager:
   - TeaBagHolder
   - CupDragFrame
   - Cup
-  - Bell
-  - String
+  - 
+  - ' '
   - TeaIngredient
   - TeaBagHolderConstrainer
   - 
@@ -54,6 +60,9 @@ TagManager:
     locked: 0
   - name: Table
     uniqueID: 1232999231
+    locked: 0
+  - name: Milk
+    uniqueID: 1488995009
     locked: 0
   - name: Default
     uniqueID: 0

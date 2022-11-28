@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4cb0695fde10c4afca99867b112199b3
+guid: e4775cd5134a042efb5cec77f49175b4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,49 +104,49 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Milk Bottles_Milk_0
+      name: Milk Solid_Milk_Milk_0
       rect:
         serializedVersion: 2
         x: 1231
-        y: 1065
+        y: 1067
         width: 233
         height: 105
       alignment: 9
-      pivot: {x: 0.05, y: 0.5}
+      pivot: {x: 0.2054894, y: 0.5000012}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c803a2e92a9b64d3696f5fc653be8b2b
-      internalID: 632127813
+      spriteID: 4c6e8e53af9434f498e88ff5ba615fea
+      internalID: 1019091480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Milk Bottles_Milk_1
+      name: Milk Solid_Milk_Milk_1
       rect:
         serializedVersion: 2
-        x: 2542
+        x: 2540
         y: 1092
         width: 233
         height: 106
       alignment: 9
-      pivot: {x: 0.05, y: 0.5}
+      pivot: {x: 0.18816537, y: 0.50000113}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 871986190db0a47e49e4e337518df1fd
-      internalID: 1208174489
+      spriteID: 97269c15c085245dbb4b2893efc3b0de
+      internalID: -1806520280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Milk Bottles_Milk_2
+      name: Milk Solid_Milk_Milk_2
       rect:
         serializedVersion: 2
         x: 307
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0389e5bd0d424fa6971de54924b5fc2
-      internalID: -1626041229
+      spriteID: 740ce7063fd59487880d48330843413c
+      internalID: -652030528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Milk Bottles_Milk_3
+      name: Milk Solid_Milk_Milk_3
       rect:
         serializedVersion: 2
         x: 743
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6c084ac5542054051a2ea7dc6a6567d9
-      internalID: -97599824
+      spriteID: f3dd341024b8c465b85a33702ecd2225
+      internalID: -2077195684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Milk Bottles_Milk_4
+      name: Milk Solid_Milk_Milk_4
       rect:
         serializedVersion: 2
         x: 1181
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82c9d017888a0425d8e8c113ba2e3c2e
-      internalID: -341718910
+      spriteID: 0080bea74906c49f2840948bed291564
+      internalID: -459297648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Milk Bottles_Milk_5
+      name: Milk Solid_Milk_Milk_5
       rect:
         serializedVersion: 2
         x: 1617
@@ -223,14 +223,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bba72556297144a678dd876fa85b9764
-      internalID: 1468606908
+      spriteID: 6cac993eeb24f4744ae7f47c200525ca
+      internalID: 1744614214
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Milk Bottles_Milk_6
+      name: Milk Solid_Milk_Milk_6
       rect:
         serializedVersion: 2
         x: 2053
@@ -244,14 +244,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25b12a1f89a314f56ac9e68cbff81b4a
-      internalID: -708927161
+      spriteID: 2aff6fe30493c40f1b89087f9c8e5d12
+      internalID: -1115040786
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Milk Bottles_Milk_7
+      name: Milk Solid_Milk_Milk_7
       rect:
         serializedVersion: 2
         x: 2490
@@ -265,8 +265,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 92b28d17707d246c5839811570eaa0c9
-      internalID: -250242908
+      spriteID: 8dc3bcbe70d06433f91f633b483b6044
+      internalID: -1717994632
       vertices: []
       indices: 
       edges: []
@@ -282,14 +282,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Milk Bottles_Milk_6: -708927161
-      Milk Bottles_Milk_1: 1208174489
-      Milk Bottles_Milk_4: -341718910
-      Milk Bottles_Milk_3: -97599824
-      Milk Bottles_Milk_0: 632127813
-      Milk Bottles_Milk_5: 1468606908
-      Milk Bottles_Milk_2: -1626041229
-      Milk Bottles_Milk_7: -250242908
+      Milk Solid_Milk_Milk_4: -459297648
+      Milk Solid_Milk_Milk_0: 1019091480
+      Milk Solid_Milk_Milk_2: -652030528
+      Milk Solid_Milk_Milk_7: -1717994632
+      Milk Solid_Milk_Milk_3: -2077195684
+      Milk Solid_Milk_Milk_6: -1115040786
+      Milk Solid_Milk_Milk_1: -1806520280
+      Milk Solid_Milk_Milk_5: 1744614214
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

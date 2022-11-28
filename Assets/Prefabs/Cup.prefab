@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 4900044271594898870}
   - component: {fileID: 4900044271594898871}
   m_Layer: 2
-  m_Name: Item
+  m_Name: Cup
   m_TagString: Cup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -197,7 +197,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 20
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
@@ -245,7 +245,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ps: {fileID: 4900044272125272073}
+  teabagZone: {fileID: 4900044271951506571}
   waterCapacityInSec: 1
+  nonWaterLiquidCapacityInSec: 0.5
 --- !u!1 &4900044271908549497
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +259,7 @@ GameObject:
   - component: {fileID: 4900044271908549502}
   - component: {fileID: 4900044271908549500}
   - component: {fileID: 4900044271908549503}
-  m_Layer: 1
+  m_Layer: 0
   m_Name: OneWayLid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +372,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05670309, y: -0.030556872}
+  m_Offset: {x: -0.05670309, y: -0.11857559}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -381,7 +383,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.1047035, y: 0.3465579}
+  m_Size: {x: 1.1047035, y: 0.17052045}
   m_EdgeRadius: 0
 --- !u!114 &4900044271951506571
 MonoBehaviour:
@@ -396,6 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teaBagConstrainer: {fileID: 4900044272096735484}
+  cup: {fileID: 4900044271594898866}
 --- !u!1 &4900044272046102535
 GameObject:
   m_ObjectHideFlags: 0
@@ -5313,7 +5316,7 @@ GameObject:
   - component: {fileID: 4900044272147022959}
   m_Layer: 0
   m_Name: Cup
-  m_TagString: Untagged
+  m_TagString: TeaCup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5407,4 +5410,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4900044271594898866}
-  despawnTimeInSecAfterDisdard: 3

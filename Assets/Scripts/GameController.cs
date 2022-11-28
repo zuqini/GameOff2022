@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public LevelLoader levelLoader;
     public DialogueManager dialogueManager;
     public DialogueTrigger dialogueTrigger;
+    public float despawnTimeInSecAfterDisdard = 1.5f;
 
     void Start()
     {

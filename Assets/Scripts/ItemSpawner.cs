@@ -6,7 +6,7 @@ public class ItemSpawner : MonoBehaviour
 {
     private Draggable currentDraggable;
 
-    public string itemToSpawn;
+    public GameObject itemToSpawn;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class ItemSpawner : MonoBehaviour
 
     void OnMouseDown()
     {
-        GameObject item = ObjectPooler.SharedInstance.GetPooledObject(itemToSpawn);
+        GameObject item = ObjectPooler.SharedInstance.GetPooledObject(itemToSpawn.tag);
         if (item != null)
         {
             var mousePos = Utils.GetWorldPositionOnPlane(Input.mousePosition, 0);
@@ -31,7 +31,27 @@ public class ItemSpawner : MonoBehaviour
 
             currentDraggable = item.transform.Find("Draggable").GetComponent<Draggable>();
             currentDraggable.transform.position = mousePos;
+            currentDraggable.IsEnabled = true;
             currentDraggable.IsDragging = true;
+
+            var colChildren = item.GetComponentsInChildren<Collider2D>();
+            foreach (var col in colChildren)
+            {
+                col.enabled = true;
+            }
+            var rendChildren = item.GetComponentsInChildren<Renderer>();
+            foreach (var rend in rendChildren)
+            {
+                rend.sortingLayerID = itemToSpawn.GetComponentInChildren<Renderer>().sortingLayerID;
+            }
+
+            // special logic to handle resetting cup
+            if (item.tag == "TeaCup")
+            {
+                var cupController = item.transform.Find("Cup").GetComponent<CupController>();
+                cupController.ResetCup();
+            }
+
             item.SetActive(true);
         }
     }

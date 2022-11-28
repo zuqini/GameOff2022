@@ -24,7 +24,6 @@ public class KettleController : MonoBehaviour
     public float WaterTemperature { get => waterTemperature; }
 
     public Draggable draggable;
-    public CupController cup;
     public ParticleSystem ps;
     public Transform baseLatchedPosition;
     public Transform water;
@@ -64,7 +63,7 @@ public class KettleController : MonoBehaviour
     {
         waterTemperature = Mathf.Max(0, waterTemperature - temperatureDecrRate * Time.deltaTime);
 
-        var shouldPour = draggable.IsDragging && pourZone.ShouldPour && !cup.IsFullWater();
+        var shouldPour = draggable.IsDragging && pourZone.TargetCup != null && !pourZone.TargetCup.IsFullWater();
         if (shouldPour && !isRotating)
         {
             isRotating = true;
@@ -80,7 +79,8 @@ public class KettleController : MonoBehaviour
         if (isPouring)
         {
             var waterToPour = Mathf.Min(Time.deltaTime, waterLevel);
-            var waterPoured = cup.PourWater(waterToPour);
+            // if isPouring is true, TargetCup cannot be null
+            var waterPoured = pourZone.TargetCup.PourWater(waterToPour);
             waterLevel = Mathf.Max(0f, waterLevel - waterPoured); // waterlevel should always be >= 0
         }
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
+    private Collider2D col;
     private Vector3 targetPosition;
     private Vector3 currentVelocity;
     private float startXPos;
@@ -11,15 +12,14 @@ public class Draggable : MonoBehaviour
     private bool isDragging = false;
     private bool isEnabled = true;
     private bool shouldDiscard = false;
-    private int originalSortingLayerID;
 
     public Rigidbody2D rb;
-    public int despawnTimeInSecAfterDisdard = 3;
     public bool IsDragging { get => isDragging; set => isDragging = value; }
     public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
 
     void Start()
     {
+        col = GetComponent<Collider2D>();
     }
 
     void Update()
@@ -31,7 +31,7 @@ public class Draggable : MonoBehaviour
 
         if (IsDragging)
         {
-            DragObject();
+            SetTargetPosition();
         }
     }
 
@@ -39,13 +39,14 @@ public class Draggable : MonoBehaviour
     {
         if (!isEnabled)
         {
+            col.enabled = false;
             isDragging = false;
             return;
         }
+        col.enabled = true;
 
         if (IsDragging)
         {
-            Debug.Log("dragging");
             rb.MovePosition(targetPosition);
         }
 
@@ -57,9 +58,8 @@ public class Draggable : MonoBehaviour
         if (!isEnabled) {
             return;
         }
-        Debug.Log("lol");
         isDragging = true;
-        Vector3 mousePos = Utils.GetWorldPositionOnPlane(Input.mousePosition, transform.position.z);
+        Vector3 mousePos = Utils.GetWorldPositionOnPlane(Utils.ClipMousePosToScreen(Input.mousePosition), transform.position.z);
 
         startXPos = mousePos.x - transform.position.x;
         startYPos = mousePos.y - transform.position.y;
@@ -77,45 +77,30 @@ public class Draggable : MonoBehaviour
         currentVelocity = Vector3.zero;
 
         if (shouldDiscard) {
-            var colChildren = transform.parent.gameObject.GetComponentsInChildren<Collider2D>();
-            foreach (var col in colChildren)
+            isEnabled = false;
+            Utils.SetColliderEnabledRecursive(transform.parent.gameObject, false);
+            Utils.SetSortingLayerRecursive(transform.parent.gameObject, SortingLayer.NameToID("BehindTable"));
+
+            // need to find a better way to do this, special logic for discarding Cup shit
+            if (rb.gameObject.tag == "Cup")
             {
-                col.enabled = false;
-            }
-            var rendChildren = transform.parent.gameObject.GetComponentsInChildren<Renderer>();
-            foreach (var rend in rendChildren)
-            {
-                // assert that every child has the same sorting layer
-                originalSortingLayerID = rend.sortingLayerID;
-                rend.sortingLayerID = SortingLayer.NameToID("BehindTable");
+                var cup = rb.GetComponent<CupController>();
+                cup.teabagZone.DiscardAllTeaBags();
             }
 
-            StartCoroutine(Discard());
+            StartCoroutine(SetInactive());
             return;
         }
     }
 
-    private IEnumerator Discard() {
-        yield return new WaitForSeconds(despawnTimeInSecAfterDisdard);
-
+    private IEnumerator SetInactive() {
+        yield return new WaitForSeconds(GameController.SharedInstance.despawnTimeInSecAfterDisdard);
         transform.parent.gameObject.SetActive(false);
-        var colChildren = transform.parent.gameObject.GetComponentsInChildren<Collider2D>();
-        foreach (var col in colChildren)
-        {
-            col.enabled = true;
-        }
-        var rendChildren = transform.parent.gameObject.GetComponentsInChildren<Renderer>();
-        foreach (var rend in rendChildren)
-        {
-            rend.sortingLayerID = originalSortingLayerID;
-        }
     }
 
-    private void DragObject()
+    private void SetTargetPosition()
     {
-        Vector3 mousePos = Input.mousePosition;
-
-        mousePos = Utils.GetWorldPositionOnPlane(mousePos, transform.position.z);
+        Vector3 mousePos = Utils.GetWorldPositionOnPlane(Utils.ClipMousePosToScreen(Input.mousePosition), transform.position.z);
         targetPosition = GetTargetPosition(mousePos);
         currentVelocity = targetPosition - transform.position;
     }
