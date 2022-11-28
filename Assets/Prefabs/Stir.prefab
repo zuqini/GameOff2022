@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7112407085001921259}
   m_Layer: 11
   m_Name: Stir
-  m_TagString: Untagged
+  m_TagString: Stir
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,7 +227,7 @@ GameObject:
   - component: {fileID: 7112407086498950557}
   m_Layer: 0
   m_Name: Stir
-  m_TagString: Untagged
+  m_TagString: Stir
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

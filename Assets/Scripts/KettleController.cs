@@ -29,7 +29,7 @@ public class KettleController : MonoBehaviour
     public Transform water;
     public Transform waterMarkers;
     public KettleLeverController kettleLever;
-    public PourZoneController pourZone;
+    public CupZoneController pourZone;
     public int pourAngle = 60;
     public float rotationLerpDuration = 1;
     public float waterCapacityInSec = 2;
@@ -78,7 +78,6 @@ public class KettleController : MonoBehaviour
         var isPouring = isRotating && targetAngle == rb.rotation;
         if (isPouring)
         {
-            Debug.Log("Pouring");
             var waterToPour = Mathf.Min(Time.deltaTime, waterLevel);
             // if isPouring is true, TargetCup cannot be null
             var waterPoured = pourZone.TargetCup.PourWater(waterToPour);

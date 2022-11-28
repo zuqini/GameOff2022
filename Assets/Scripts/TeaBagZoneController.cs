@@ -5,12 +5,14 @@ using UnityEngine;
 public class TeaBagZoneController : MonoBehaviour
 {
     private List<TeaBagController> teabags;
+    private List<Rigidbody2D> stirs;
     public Transform teaBagConstrainer;
     public Rigidbody2D cup;
 
     void Start()
     {
         teabags = new List<TeaBagController>();
+        stirs = new List<Rigidbody2D>();
     }
 
     void FixedUpdate()
@@ -29,6 +31,10 @@ public class TeaBagZoneController : MonoBehaviour
             var draggable = teabag.draggable;
             draggable.IsEnabled = false;
         });
+
+        stirs.ForEach(stir => {
+            // stir.MovePosition(new Vector3(transform.position.x, transform.position.y + 0.25f, transform.position.z));
+        });
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -42,6 +48,12 @@ public class TeaBagZoneController : MonoBehaviour
         if (other.gameObject.tag == "Sugar")
         {
             other.transform.parent.gameObject.SetActive(false);
+        }
+
+        if (other.gameObject.tag == "Stir")
+        {
+            var stir = other.gameObject.GetComponent<Rigidbody2D>();
+            stirs.Add(stir);
         }
     }
 

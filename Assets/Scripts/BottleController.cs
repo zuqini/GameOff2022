@@ -11,7 +11,7 @@ public class BottleController : MonoBehaviour
     private float rotationTimeElapsed = Mathf.Infinity;
     private bool isRotating = false;
 
-    public PourZoneController pourZone;
+    public CupZoneController pourZone;
     public Draggable draggable;
     public Transform liquid;
     public Transform lid;

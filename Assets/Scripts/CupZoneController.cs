@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PourZoneController : MonoBehaviour
+public class CupZoneController : MonoBehaviour
 {
     private CupController targetCup;
 
