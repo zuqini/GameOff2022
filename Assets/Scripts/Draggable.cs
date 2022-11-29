@@ -55,12 +55,15 @@ public class Draggable : MonoBehaviour
 
             if (shouldStabilize)
             {
-                if (rb.rotation > targetStabilizationRotation)
+                rb.angularVelocity = 0;
+                var rotation = Utils.ClampAngle(rb.rotation);
+                Debug.Log("r: " + rb.rotation + ", cr: " + rotation);
+                if (rotation > targetStabilizationRotation)
                 {
-                    rb.SetRotation(Mathf.Max(targetStabilizationRotation, rb.rotation - stabilizationSpeed * Time.deltaTime));
+                    rb.SetRotation(Mathf.Max(targetStabilizationRotation, rotation - stabilizationSpeed * Time.deltaTime));
                 }
-                else if (rb.rotation < targetStabilizationRotation) {
-                    rb.SetRotation(Mathf.Min(targetStabilizationRotation, rb.rotation + stabilizationSpeed * Time.deltaTime));
+                else if (rotation < targetStabilizationRotation) {
+                    rb.SetRotation(Mathf.Min(targetStabilizationRotation, rotation + stabilizationSpeed * Time.deltaTime));
                 }
             }
         }
@@ -98,13 +101,13 @@ public class Draggable : MonoBehaviour
         if (shouldDiscard) {
             isEnabled = false;
             Utils.SetColliderEnabledRecursive(transform.parent.gameObject, false);
-            Utils.SetSortingLayerRecursive(transform.parent.gameObject, SortingLayer.NameToID("BehindTable"));
+            Utils.SetRendererRecursive(transform.parent.gameObject, SortingLayer.NameToID("BehindTable"));
 
             // need to find a better way to do this, special logic for discarding Cup shit
             if (rb.gameObject.tag == "Cup")
             {
                 var cup = rb.GetComponent<CupController>();
-                cup.teabagZone.DiscardAllTeaBags();
+                cup.teabagZone.DiscardContents();
             }
 
             StartCoroutine(SetInactive());

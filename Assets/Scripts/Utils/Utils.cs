@@ -46,12 +46,28 @@ public static class Utils
         }
     }
 
-    public static void SetSortingLayerRecursive(GameObject item, int sortingLayerID)
+    public static void SetRendererRecursive(GameObject item, int sortingLayerID, bool enabled = true)
     {
             var rendChildren = item.GetComponentsInChildren<Renderer>();
             foreach (var rend in rendChildren)
             {
                 rend.sortingLayerID = sortingLayerID;
+                rend.enabled = enabled;
             }
+    }
+
+    public static float ClampAngle(float angle)
+    {
+        // reduce the angle  
+        angle =  angle % 360; 
+
+        // force it to be the positive remainder, so that 0 <= angle < 360  
+        angle = (angle + 360) % 360;  
+
+        // force into the minimum absolute value residue class, so that -180 < angle <= 180  
+        if (angle > 180)
+            angle -= 360;
+
+        return angle;
     }
 }

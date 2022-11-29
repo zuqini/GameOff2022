@@ -13,7 +13,9 @@ public class BellController : MonoBehaviour
     public CupZoneController serveZone;
     public Transform serveTarget;
     public Collider2D leftCollider;
-    private float serveDuration = 3;
+    public CameraController cameraController;
+    public float serveDuration = 2;
+    public float cameraDelayDuration = .25f;
 
     void Start()
     {
@@ -54,5 +56,12 @@ public class BellController : MonoBehaviour
         startingPos = cup.transform.position;
         timeElapsed = 0;
         leftCollider.enabled = false;
+        StartCoroutine(MoveCamera());
+    }
+
+    private IEnumerator MoveCamera()
+    {
+        yield return new WaitForSeconds(cameraDelayDuration);
+        cameraController.FollowServe();
     }
 }

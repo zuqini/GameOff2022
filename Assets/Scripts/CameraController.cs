@@ -22,10 +22,20 @@ public class CameraController : MonoBehaviour
     {
         if (horizontal > 0)
         {
-            vcam.Follow = brewTarget;
+            FollowBrew();
         } else if (horizontal < 0)
         {
-            vcam.Follow = serveTarget;
+            FollowServe();
         }
+    }
+
+    public void FollowServe()
+    {
+        vcam.Follow = serveTarget;
+    }
+
+    public void FollowBrew()
+    {
+        vcam.Follow = brewTarget;
     }
 }

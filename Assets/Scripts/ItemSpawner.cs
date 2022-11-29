@@ -34,16 +34,8 @@ public class ItemSpawner : MonoBehaviour
             currentDraggable.IsEnabled = true;
             currentDraggable.IsDragging = true;
 
-            var colChildren = item.GetComponentsInChildren<Collider2D>();
-            foreach (var col in colChildren)
-            {
-                col.enabled = true;
-            }
-            var rendChildren = item.GetComponentsInChildren<Renderer>();
-            foreach (var rend in rendChildren)
-            {
-                rend.sortingLayerID = itemToSpawn.GetComponentInChildren<Renderer>().sortingLayerID;
-            }
+            Utils.SetColliderEnabledRecursive(item, true);
+            Utils.SetRendererRecursive(item, itemToSpawn.GetComponentInChildren<Renderer>().sortingLayerID);
 
             // special logic to handle resetting cup
             if (item.tag == "TeaCup")
