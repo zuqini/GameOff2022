@@ -18,7 +18,6 @@ public class BellController : MonoBehaviour
     public float cupJumpAnimationLength = 2.20f;
     public float serveDuration = 2;
     public float cameraDelayDuration = .25f;
-    public float customerGrabForce = 100f;
 
     void Start()
     {

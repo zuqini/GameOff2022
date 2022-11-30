@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         cam.eventMask = cameraEventMask;
-        // dialogueTrigger.TriggerDialogue(0);
+        dialogueTrigger.TriggerDialogue(0);
     }
 
     void Awake()

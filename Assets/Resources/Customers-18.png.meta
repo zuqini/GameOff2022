@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -76,9 +76,369 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Customers-18_0
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 3289
+        width: 666
+        height: 741
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abf38641b0e724639a6ba9473e5a0699
+      internalID: -1275610753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_1
+      rect:
+        serializedVersion: 2
+        x: 1242
+        y: 3289
+        width: 665
+        height: 682
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47f2474a736cf4a7e93e7661e992a5a3
+      internalID: -944634997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_2
+      rect:
+        serializedVersion: 2
+        x: 2243
+        y: 3289
+        width: 666
+        height: 714
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef74be5ed98b340d1bf572334e862da0
+      internalID: -677515694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_3
+      rect:
+        serializedVersion: 2
+        x: 3244
+        y: 3289
+        width: 666
+        height: 714
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52f68ab73b89a4c739f7767d1d486f32
+      internalID: 1617584820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_4
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 2209
+        width: 592
+        height: 720
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34a35f6b1ee614e4e8785c87886f15cd
+      internalID: -261908920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_5
+      rect:
+        serializedVersion: 2
+        x: 1311
+        y: 2209
+        width: 592
+        height: 720
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f80a8093907941f0b38ced8add84701
+      internalID: -1460639767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_6
+      rect:
+        serializedVersion: 2
+        x: 2312
+        y: 2209
+        width: 582
+        height: 679
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e0c38c2bbee544a7a7d10ce047ad6ec
+      internalID: -833117186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_7
+      rect:
+        serializedVersion: 2
+        x: 3313
+        y: 2209
+        width: 582
+        height: 673
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 15cdb68c0f21f429ca563e430f65ea80
+      internalID: 826719761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_8
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 1159
+        width: 732
+        height: 722
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3ae0e08c1e8542c5852965d27fe17e7
+      internalID: 304149212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_9
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1159
+        width: 732
+        height: 753
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d47d00fbd952a45099206a323ddfa53c
+      internalID: -22360438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_10
+      rect:
+        serializedVersion: 2
+        x: 2217
+        y: 1159
+        width: 732
+        height: 722
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc77549e4cfbc4131a8cb559dd3ed7ee
+      internalID: -2125916648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_11
+      rect:
+        serializedVersion: 2
+        x: 3218
+        y: 1159
+        width: 732
+        height: 759
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5a919d16ee3340ea9620b89fd508697
+      internalID: 1859988153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_12
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 137
+        width: 580
+        height: 698
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2720ca158a23e4b43a10bbfba3bfa57f
+      internalID: -573433025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_13
+      rect:
+        serializedVersion: 2
+        x: 1299
+        y: 137
+        width: 580
+        height: 719
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 604a5d24ac3284cd4a502873bf3d299a
+      internalID: 568111147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_14
+      rect:
+        serializedVersion: 2
+        x: 2298
+        y: 137
+        width: 582
+        height: 690
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c29a532ff8e524206b77fc0c6dc44d1f
+      internalID: 264028923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Customers-18_15
+      rect:
+        serializedVersion: 2
+        x: 3299
+        y: 137
+        width: 580
+        height: 719
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38ea7fef2f0324fe688a5e9290a8ee08
+      internalID: 77437538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -89,7 +449,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Customers-18_15: 77437538
+      Customers-18_5: -1460639767
+      Customers-18_3: 1617584820
+      Customers-18_6: -833117186
+      Customers-18_9: -22360438
+      Customers-18_0: -1275610753
+      Customers-18_1: -944634997
+      Customers-18_8: 304149212
+      Customers-18_4: -261908920
+      Customers-18_2: -677515694
+      Customers-18_12: -573433025
+      Customers-18_14: 264028923
+      Customers-18_11: 1859988153
+      Customers-18_10: -2125916648
+      Customers-18_7: 826719761
+      Customers-18_13: 568111147
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

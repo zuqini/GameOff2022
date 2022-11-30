@@ -63,7 +63,7 @@ public class KettleController : MonoBehaviour
     {
         waterTemperature = Mathf.Max(0, waterTemperature - temperatureDecrRate * Time.deltaTime);
 
-        var shouldPour = draggable.IsDragging && pourZone.TargetCup != null && !pourZone.TargetCup.IsFullWater();
+        var shouldPour = draggable.IsDragging && pourZone.TargetCup != null && !pourZone.TargetCup.IsFullWater() && waterLevel > 0;
         if (shouldPour && !isRotating)
         {
             isRotating = true;
@@ -170,7 +170,7 @@ public class KettleController : MonoBehaviour
 
     public bool IsHot()
     {
-        return waterTemperature > unlatchTemperature;
+        return waterLevel > 0 && waterTemperature > unlatchTemperature;
     }
 
     private void setTargetRotation(float target)
