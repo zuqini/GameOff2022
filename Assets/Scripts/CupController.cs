@@ -15,14 +15,20 @@ public class CupController : MonoBehaviour
     private float milk = 0;
     private float oatMilk = 0;
     private float honey = 0;
+    private Animator anim;
 
     public ParticleSystem ps;
     public TeaBagZoneController teabagZone;
     public float waterCapacityInSec = 0.5f;
     public float nonWaterLiquidCapacityInSec = 0.25f;
+    public Draggable draggable;
+
+    public Animator Anim { get => anim; }
 
     void Start()
     {
+        anim = GetComponent<Animator>();
+        anim.enabled = false;
     }
 
     void Update()

@@ -33,14 +33,15 @@ public class TeaBagZoneController : MonoBehaviour
 
         stirs.ForEach(stir => {
             stir.MovePosition(new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z));
-            // stir.SetRotation(Mathf.Max(-60, Mathf.Min(60, Utils.ClampAngle(stir.rotation))));
-            var rotation = Utils.ClampAngle(stir.rotation);
-            if (rotation < stirAngle) {
-                rotation = Mathf.Min(rotation + stirSpeed * Time.deltaTime, stirAngle);
-            } else if (rotation > stirAngle) {
-                rotation = Mathf.Max(rotation - stirSpeed * Time.deltaTime, stirAngle);
-            }
-            stir.SetRotation(rotation);
+            stir.SetRotation(Mathf.Max(-60, Mathf.Min(60, Utils.ClampAngle(stir.rotation))));
+
+            // var rotation = Utils.ClampAngle(stir.rotation);
+            // if (rotation < stirAngle) {
+            //     rotation = Mathf.Min(rotation + stirSpeed * Time.deltaTime, stirAngle);
+            // } else if (rotation > stirAngle) {
+            //     rotation = Mathf.Max(rotation - stirSpeed * Time.deltaTime, stirAngle);
+            // }
+            // stir.SetRotation(rotation);
         });
     }
 
@@ -66,24 +67,76 @@ public class TeaBagZoneController : MonoBehaviour
             var stir = other.gameObject.GetComponent<Rigidbody2D>();
             var draggable = other.transform.parent.Find("Draggable").GetComponent<Draggable>();
             stirs.Add(stir);
-            other.enabled = false;
+            // other.enabled = false;
             draggable.IsEnabled = false;
         }
     }
 
-    public void DiscardContents()
+    public void AddForceToContents(Vector2 force, ForceMode2D mode = ForceMode2D.Force)
+    {
+        teabags.ForEach(teabag => {
+            teabag.Body.AddForce(force, mode);
+        });
+        stirs.ForEach(stir => {
+            stir.AddForce(force, mode);
+        });
+    }
+
+    public void SetContentVelocity(Vector2 velocity)
+    {
+        teabags.ForEach(teabag => {
+            teabag.Body.velocity = velocity;
+        });
+        stirs.ForEach(stir => {
+            stir.velocity = velocity;
+        });
+    }
+
+    public void SetStirCollider(bool enabled)
+    {
+        stirs.ForEach(stir => {
+            var colliders = stir.GetComponents<Collider2D>();
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].enabled = false;
+            }
+        });
+    }
+
+    public void DiscardContents(bool disableColliders = true)
     {
         teabags.ForEach(teabag => {
             var teabagParent = teabag.transform.parent.gameObject;
-            Utils.SetColliderEnabledRecursive(teabagParent, false);
+            if (disableColliders)
+            {
+                Utils.SetColliderEnabledRecursive(teabagParent, false);
+            }
             Utils.SetRendererRecursive(teabagParent, SortingLayer.NameToID("BehindTable"));
             StartCoroutine(SetInactive(teabagParent));
         });
         stirs.ForEach(stir => {
             var stirParent = stir.transform.parent.gameObject;
-            Utils.SetColliderEnabledRecursive(stirParent, false);
+            if (disableColliders)
+            {
+                Utils.SetColliderEnabledRecursive(stirParent, false);
+            }
             Utils.SetRendererRecursive(stirParent, SortingLayer.NameToID("BehindTable"));
             StartCoroutine(SetInactive(stirParent));
+        });
+        teabags.Clear();
+        stirs.Clear();
+    }
+
+    public void SetContentsInactive()
+    {
+        teabags.ForEach(teabag => {
+            var teabagParent = teabag.transform.parent.gameObject;
+            teabagParent.SetActive(false);
+        });
+        stirs.ForEach(stir => {
+
+            var stirParent = stir.transform.parent.gameObject;
+            stirParent.SetActive(false);
         });
         teabags.Clear();
         stirs.Clear();

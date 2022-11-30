@@ -2525,10 +2525,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serveZone: {fileID: 721595120}
   serveTarget: {fileID: 169007474}
-  leftCollider: {fileID: 883138859}
   cameraController: {fileID: 1969196465}
+  leftBoundary: {fileID: 883138859}
+  cupJumpAnimationLength: 2.25
   serveDuration: 2.5
   cameraDelayDuration: 0.5
+  customerGrabForce: 800
 --- !u!95 &470077167
 Animator:
   serializedVersion: 4
@@ -6923,7 +6925,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -3.2337708}
+  m_Offset: {x: 18.949135, y: -3.2337708}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6934,7 +6936,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 80, y: 1.0324585}
+  m_Size: {x: 42.10173, y: 1.0324583}
   m_EdgeRadius: 0
 --- !u!1 &1350380578
 GameObject:
@@ -8103,7 +8105,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -836028413
   m_SortingLayer: -3
-  m_SortingOrder: 0
+  m_SortingOrder: -10
   m_Sprite: {fileID: -485314375, guid: f965c441650464a39945bb48d109465d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

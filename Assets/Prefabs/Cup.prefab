@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 4900044271594898866}
   - component: {fileID: 4900044271594898870}
   - component: {fileID: 4900044271594898871}
+  - component: {fileID: 1061148244}
   m_Layer: 7
   m_Name: Cup
   m_TagString: Cup
@@ -248,6 +249,27 @@ MonoBehaviour:
   teabagZone: {fileID: 4900044271951506571}
   waterCapacityInSec: 1
   nonWaterLiquidCapacityInSec: 0.5
+  draggable: {fileID: 4900044272834911581}
+--- !u!95 &1061148244
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4900044271594898877}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae6931af52f7546159be1c4e3b2c3bcd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4900044271951506580
 GameObject:
   m_ObjectHideFlags: 0

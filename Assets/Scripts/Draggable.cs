@@ -57,12 +57,12 @@ public class Draggable : MonoBehaviour
             {
                 rb.angularVelocity = 0;
                 var rotation = Utils.ClampAngle(rb.rotation);
-                Debug.Log("r: " + rb.rotation + ", cr: " + rotation);
                 if (rotation > targetStabilizationRotation)
                 {
                     rb.SetRotation(Mathf.Max(targetStabilizationRotation, rotation - stabilizationSpeed * Time.deltaTime));
                 }
-                else if (rotation < targetStabilizationRotation) {
+                else if (rotation < targetStabilizationRotation)
+                {
                     rb.SetRotation(Mathf.Min(targetStabilizationRotation, rotation + stabilizationSpeed * Time.deltaTime));
                 }
             }

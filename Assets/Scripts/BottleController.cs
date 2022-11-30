@@ -34,7 +34,7 @@ public class BottleController : MonoBehaviour
     void FixedUpdate()
     {
         var shouldPour = draggable.IsDragging && pourZone.TargetCup != null && !pourZone.TargetCup.IsFullLiquid(liquidType);
-        Debug.Log(pourZone.TargetCup);
+        // Debug.Log(pourZone.TargetCup);
         if (shouldPour && !isRotating)
         {
             isRotating = true;

@@ -9,13 +9,16 @@ public class BellController : MonoBehaviour
     private CupController cupController;
     private Vector3 startingPos;
     private float timeElapsed = Mathf.Infinity;
+    private bool isServing = false;
 
     public CupZoneController serveZone;
     public Transform serveTarget;
-    public Collider2D leftCollider;
     public CameraController cameraController;
+    public Collider2D leftBoundary;
+    public float cupJumpAnimationLength = 2.20f;
     public float serveDuration = 2;
     public float cameraDelayDuration = .25f;
+    public float customerGrabForce = 100f;
 
     void Start()
     {
@@ -28,7 +31,7 @@ public class BellController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (cup == null)
+        if (cup == null || !isServing)
         {
             return;
         }
@@ -36,12 +39,29 @@ public class BellController : MonoBehaviour
         if (timeElapsed < serveDuration)
         {
             var targetPos = Vector3.Lerp(startingPos, serveTarget.position, Mathfx.Hermite(0, 1, timeElapsed / serveDuration));
-            cup.transform.position = targetPos;
+            cup.MovePosition(targetPos);
             timeElapsed += Time.deltaTime;
         } else {
+            isServing = false;
+            leftBoundary.enabled = true;
             cup.transform.position = serveTarget.position;
-            leftCollider.enabled = true;
+            // Debug.Log(cup.transform.localPosition);
+            // x is harcdoded by above position
+            // @TODO think of a better way to do this
+            cupController.teabagZone.SetStirCollider(false);
+            cupController.Anim.enabled = true;
+            cupController.Anim.SetTrigger("CupJumpAndBounce");
+            StartCoroutine(SetInactiveAfterAnimation());
         }
+    }
+
+    private IEnumerator SetInactiveAfterAnimation() {
+        yield return new WaitForSeconds(cupJumpAnimationLength);
+        cupController.teabagZone.SetContentsInactive();
+        // hack
+        yield return new WaitForSeconds(1);
+        cupController.Anim.enabled = false;
+        cup.transform.parent.gameObject.SetActive(false);
     }
 
     void OnMouseDown()
@@ -52,10 +72,13 @@ public class BellController : MonoBehaviour
         {
             return;
         }
+        isServing = true;
+        leftBoundary.enabled = false;
+        cupController = serveZone.TargetCup;
+        cupController.draggable.IsEnabled = false;
         cup = serveZone.TargetCup.GetComponent<Rigidbody2D>();
         startingPos = cup.transform.position;
         timeElapsed = 0;
-        leftCollider.enabled = false;
         StartCoroutine(MoveCamera());
     }
 
