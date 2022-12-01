@@ -29,6 +29,6 @@ public class DialogueTrigger : MonoBehaviour
     }
 
     public void TriggerDialogue(int i) {
-        GameController.SharedInstance.dialogueManager.StartDialogue(dialogues[i]);
+        // GameController.SharedInstance.dialogueManager.StartDialogue(dialogues[i]);
     }
 }

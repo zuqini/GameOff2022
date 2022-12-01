@@ -44,7 +44,7 @@ public class BellController : MonoBehaviour
             isServing = false;
             leftBoundary.enabled = true;
             cup.transform.position = serveTarget.position;
-            // Debug.Log(cup.transform.localPosition);
+            Debug.Log(cup.transform.localPosition);
             // x is harcdoded by above position
             // @TODO think of a better way to do this
             cupController.teabagZone.SetStirCollider(false);

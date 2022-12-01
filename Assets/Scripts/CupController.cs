@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum LiquidType
-{
-    Milk,
-    OatMilk,
-    Honey,
-}
-
 public class CupController : MonoBehaviour
 {
     private float water = 0;

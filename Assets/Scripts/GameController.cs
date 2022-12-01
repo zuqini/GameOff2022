@@ -3,6 +3,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LiquidType
+{
+    Milk,
+    OatMilk,
+    Honey,
+}
+
+public struct Order
+{
+    public int blackTea;
+    public int herbTea;
+    public int lightTea;
+    public bool hasHoney;
+    public bool hasMilk;
+    public bool hasOatMilk;
+    public int sugarCount;
+    public bool hasWater;
+    public bool hasSpoon;
+
+    public static Order RandomBasic()
+    {
+        var teaType = Utils.Random.Next(3);
+        var teaCount = Utils.Random.Next(1, 4);
+        var milkType = Utils.Random.Next(2);
+        return new Order {
+            blackTea = teaType == 0 ? teaCount : 0,
+            herbTea = teaType == 1 ? teaCount : 0,
+            lightTea = teaType == 2 ? teaCount : 0,
+            hasHoney = Utils.Random.Next(2) == 0,
+            hasMilk = milkType == 1,
+            hasOatMilk = milkType == 2,
+            sugarCount = Utils.Random.Next(5),
+            hasSpoon = Utils.Random.Next(2) == 0,
+        };
+    }
+}
+
 public class GameController : MonoBehaviour
 {
     [SerializeField]
@@ -18,7 +55,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         cam.eventMask = cameraEventMask;
-        dialogueTrigger.TriggerDialogue(0);
+        // dialogueTrigger.TriggerDialogue(0);
     }
 
     void Awake()
