@@ -14,6 +14,7 @@ public class Draggable : MonoBehaviour
     private bool shouldDiscard = false;
 
     public Rigidbody2D rb;
+    public AudioSource dragSound; //this needs to be passed in because it is played before item is active
     public bool shouldStabilize = false;
     public float stabilizationSpeed = 500f;
     public float targetStabilizationRotation = 0f;
@@ -86,6 +87,17 @@ public class Draggable : MonoBehaviour
         startXPos = mousePos.x - transform.position.x;
         startYPos = mousePos.y - transform.position.y;
         targetPosition = GetTargetPosition(mousePos);
+
+        PlayDragSound();
+    }
+
+    public void PlayDragSound()
+    {
+        // need to find a better way to do this, special logic for cup sound
+        if (rb.gameObject.tag == "Cup")
+        {
+            dragSound.Play();
+        }
     }
 
     public void OnMouseUp()

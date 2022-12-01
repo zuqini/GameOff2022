@@ -6,6 +6,7 @@ using UnityEngine;
 public class KettleController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private AudioSource pourSound;
     private Transform waterTop;
     private Transform waterBot;
 
@@ -43,6 +44,7 @@ public class KettleController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        pourSound = GetComponent<AudioSource>();
         // maybe refactor this
         waterTop = waterMarkers.Find("WaterTop");
         waterBot = waterMarkers.Find("WaterBot");
@@ -81,7 +83,13 @@ public class KettleController : MonoBehaviour
             var waterToPour = Mathf.Min(Time.deltaTime, waterLevel);
             // if isPouring is true, TargetCup cannot be null
             var waterPoured = pourZone.TargetCup.PourWater(waterToPour);
+            if (!pourZone.TargetCup.IsFullWater() && !pourSound.isPlaying) {
+                pourSound.Play();
+            }
             waterLevel = Mathf.Max(0f, waterLevel - waterPoured); // waterlevel should always be >= 0
+        }
+        if (!isPouring && pourSound.isPlaying) {
+            pourSound.Stop();
         }
 
         if (!draggable.IsDragging)
@@ -151,6 +159,12 @@ public class KettleController : MonoBehaviour
     public void FillWater(float dt)
     {
         waterLevel = Mathf.Min(waterCapacityInSec, waterLevel + waterFillRateInSec * dt);
+        waterTemperature = Mathf.Max(0, waterTemperature - 100 * dt);
+    }
+
+    public bool isFull()
+    {
+        return waterLevel > waterCapacityInSec - 0.005;
     }
 
     public void RaiseTemperature(float dt)

@@ -6,6 +6,7 @@ using UnityEngine;
 public class BellController : MonoBehaviour
 {
     private Animator animator;
+    private AudioSource bellSound;
     private Rigidbody2D cup;
     private CupController cupController;
     private Vector3 startingPos;
@@ -24,6 +25,7 @@ public class BellController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        bellSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -91,7 +93,7 @@ public class BellController : MonoBehaviour
     void OnMouseDown()
     {
         animator.SetTrigger("BellPress");
-
+        bellSound.Play();
         if (!customer.HasOrdered || serveZone.TargetCup == null)
         {
             return;
@@ -103,6 +105,7 @@ public class BellController : MonoBehaviour
         cup = serveZone.TargetCup.GetComponent<Rigidbody2D>();
         startingPos = cup.transform.position;
         timeElapsed = 0;
+        customer.PlayDrumRoll();
         StartCoroutine(MoveCamera());
     }
 

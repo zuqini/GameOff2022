@@ -6,6 +6,7 @@ public class TeaBagZoneController : MonoBehaviour
 {
     private List<TeaBagController> teabags;
     private List<Rigidbody2D> stirs;
+    private AudioSource dropSound;
 
     private int stirCount = 0;
     private int sugarCount = 0;
@@ -29,6 +30,7 @@ public class TeaBagZoneController : MonoBehaviour
     {
         teabags = new List<TeaBagController>();
         stirs = new List<Rigidbody2D>();
+        dropSound = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -74,12 +76,14 @@ public class TeaBagZoneController : MonoBehaviour
             if (other.gameObject.tag == "BlackTeaBag") blackTeaCount++;
             if (other.gameObject.tag == "HerbalTeaBag") herbalTeaCount++;
             if (other.gameObject.tag == "LightTeaBag") lightTeaCount++;
+            dropSound.Play();
         }
 
         if (other.gameObject.tag == "Sugar")
         {
             other.transform.parent.gameObject.SetActive(false);
             sugarCount++;
+            dropSound.Play();
         }
 
         if (other.gameObject.tag == "Stir")
@@ -90,6 +94,7 @@ public class TeaBagZoneController : MonoBehaviour
             // other.enabled = false;
             draggable.IsEnabled = false;
             stirCount++;
+            dropSound.Play();
         }
     }
 

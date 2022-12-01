@@ -5,6 +5,7 @@ using UnityEngine;
 public class BottleController : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private AudioSource pourSound;
 
     private float startAngle;
     private float targetAngle;
@@ -22,6 +23,7 @@ public class BottleController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        pourSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -50,6 +52,12 @@ public class BottleController : MonoBehaviour
         if (isPouring)
         {
             pourZone.TargetCup.PourLiquid(Time.deltaTime, liquidType);
+            if (!pourZone.TargetCup.IsFullLiquid(liquidType) && !pourSound.isPlaying) {
+                pourSound.Play();
+            }
+        }
+        if (!isPouring && pourSound.isPlaying) {
+            pourSound.Stop();
         }
 
         if (rotationTimeElapsed < rotationLerpDuration)

@@ -5,7 +5,10 @@ using UnityEngine;
 public class KettleLeverController : MonoBehaviour
 {
     private Animator animator;
+    private AudioSource audioSource;
 
+    public AudioClip boilSound;
+    public AudioClip clickSound;
     public KettleController kettle;
 
     public bool IsLeverDown()
@@ -16,6 +19,7 @@ public class KettleLeverController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -29,14 +33,24 @@ public class KettleLeverController : MonoBehaviour
             if (kettle.IsOnKettleBase && !kettle.IsMaxTemperature())
             {
                 kettle.RaiseTemperature(Time.deltaTime);
+                if (kettle.IsHot() && !audioSource.isPlaying)
+                {
+                    audioSource.PlayOneShot(boilSound);
+                }
             } else {
                 animator.SetBool("IsPressed", false);
+                audioSource.Stop();
+                audioSource.PlayOneShot(clickSound);
             }
         }
     }
 
     void OnMouseDown()
     {
+        if (!IsLeverDown())
+        {
+            audioSource.PlayOneShot(clickSound);
+        }
         animator.SetBool("IsPressed", true);
     }
 }

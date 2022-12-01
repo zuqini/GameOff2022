@@ -5,12 +5,14 @@ using UnityEngine;
 public class FaucetLeverController : MonoBehaviour
 {
     private Animator animator;
+    private AudioSource pourSound;
 
     public KettleController kettle;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        pourSound = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -23,6 +25,14 @@ public class FaucetLeverController : MonoBehaviour
                 kettle.IsOnKettleBase)
         {
             kettle.FillWater(Time.deltaTime);
+            if (!kettle.isFull() && !pourSound.isPlaying)
+            {
+                pourSound.Play();
+            } 
+        }
+        else if (pourSound.isPlaying)
+        {
+            pourSound.Stop();
         }
     }
 

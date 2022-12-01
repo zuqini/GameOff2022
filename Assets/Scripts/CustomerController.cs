@@ -6,6 +6,7 @@ using UnityEngine;
 public class CustomerController : MonoBehaviour
 {
     private SpriteRenderer sprite;
+    private AudioSource audioSource;
     private string customerName = "Jane Doe";
     private float timeElapsed = Mathf.Infinity;
     private float colorTimeElapsed = Mathf.Infinity;
@@ -34,6 +35,9 @@ public class CustomerController : MonoBehaviour
     private List<string> sadOrder = new List<string>();
     private List<string> sadOrderEnder = new List<string>();
 
+    public AudioClip success;
+    public AudioClip failure;
+    public AudioClip drumroll;
     public Sprite[] maleSpriteArray;
     public Sprite[] femaleSpriteArray;
     public string[] maleNames;
@@ -95,8 +99,14 @@ public class CustomerController : MonoBehaviour
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         InitDialogue();
         Init();
+    }
+
+    public void PlayDrumRoll()
+    {
+        audioSource.PlayOneShot(drumroll);
     }
 
     void InitDialogue()
@@ -202,10 +212,12 @@ public class CustomerController : MonoBehaviour
         var dialogue = new List<string>();
         if (cupOrder.Equals(order))
         {
+            audioSource.PlayOneShot(success);
             dialogue.Add(GetRandomDialogueLine(happyOrder));
         }
         else
         {
+            audioSource.PlayOneShot(failure);
             dialogue.Add(GetRandomDialogueLine(sadOrder));
 
             if (order.blackTea != cupOrder.blackTea)

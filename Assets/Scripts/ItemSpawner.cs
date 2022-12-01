@@ -38,13 +38,14 @@ public class ItemSpawner : MonoBehaviour
             Utils.SetRendererRecursive(item, itemToSpawn.GetComponentInChildren<Renderer>().sortingLayerID);
 
             // special logic to handle resetting cup
+            item.SetActive(true);
             if (item.tag == "TeaCup")
             {
                 var cupController = item.transform.Find("Cup").GetComponent<CupController>();
                 cupController.ResetCup();
+                currentDraggable.PlayDragSound();
             }
 
-            item.SetActive(true);
         }
     }
 
