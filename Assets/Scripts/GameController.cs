@@ -26,7 +26,7 @@ public struct Order
     {
         var teaType = Utils.Random.Next(3);
         var teaCount = Utils.Random.Next(1, 4);
-        var milkType = Utils.Random.Next(2);
+        var milkType = Utils.Random.Next(3);
         return new Order {
             blackTea = teaType == 0 ? teaCount : 0,
             herbTea = teaType == 1 ? teaCount : 0,

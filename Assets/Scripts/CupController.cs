@@ -46,6 +46,7 @@ public class CupController : MonoBehaviour
         milk = 0;
         oatMilk = 0;
         honey = 0;
+        teabagZone.Reset();
     }
 
     // returns how much water is poured

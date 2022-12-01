@@ -33,6 +33,15 @@ public class TeaBagZoneController : MonoBehaviour
         dropSound = GetComponent<AudioSource>();
     }
 
+    public void Reset()
+    {
+        stirCount = 0;
+        sugarCount = 0;
+        blackTeaCount = 0;
+        herbalTeaCount = 0;
+        lightTeaCount = 0;
+    }
+
     void FixedUpdate()
     {
         var left = teaBagConstrainer.Find("left").position.x;

@@ -35,11 +35,13 @@ public class KettleLeverController : MonoBehaviour
                 kettle.RaiseTemperature(Time.deltaTime);
                 if (kettle.IsHot() && !audioSource.isPlaying)
                 {
+                    audioSource.volume = 0.3f;
                     audioSource.PlayOneShot(boilSound);
                 }
             } else {
                 animator.SetBool("IsPressed", false);
                 audioSource.Stop();
+                audioSource.volume = 1;
                 audioSource.PlayOneShot(clickSound);
             }
         }
@@ -49,6 +51,7 @@ public class KettleLeverController : MonoBehaviour
     {
         if (!IsLeverDown())
         {
+            audioSource.volume = 1;
             audioSource.PlayOneShot(clickSound);
         }
         animator.SetBool("IsPressed", true);
