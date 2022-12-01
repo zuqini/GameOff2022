@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class BellController : MonoBehaviour
@@ -15,6 +16,7 @@ public class BellController : MonoBehaviour
     public Transform serveTarget;
     public CameraController cameraController;
     public Collider2D leftBoundary;
+    public CustomerController customer;
     public float cupJumpAnimationLength = 2.20f;
     public float serveDuration = 2;
     public float cameraDelayDuration = .25f;
@@ -44,7 +46,7 @@ public class BellController : MonoBehaviour
             isServing = false;
             leftBoundary.enabled = true;
             cup.transform.position = serveTarget.position;
-            Debug.Log(cup.transform.localPosition);
+            // Debug.Log(cup.transform.localPosition);
             // x is harcdoded by above position
             // @TODO think of a better way to do this
             cupController.teabagZone.SetStirCollider(false);
@@ -61,13 +63,36 @@ public class BellController : MonoBehaviour
         yield return new WaitForSeconds(1);
         cupController.Anim.enabled = false;
         cup.transform.parent.gameObject.SetActive(false);
+
+        // compare
+        // var cupOrder = cupController.GetOrder();
+        // var customerOrder = customer.Order;
+
+        // Debug.Log("cupOrder");
+        // PrintOrder(cupOrder);
+        // Debug.Log("customerOrder");
+        // PrintOrder(customerOrder);
+        // Debug.Log(cupOrder.Equals(customerOrder));
+
+        GameController.SharedInstance.dialogueManager.ShouldEnd = true;
+        GameController.SharedInstance.dialogueManager.StartDialogue(new List<Dialogue> { customer.GenerateOrderComparisonText(cupController.GetOrder()) });
+    }
+
+    private void PrintOrder(Order order)
+    {
+        foreach (var field in typeof(Order).GetFields(BindingFlags.Instance |
+                                                 BindingFlags.NonPublic |
+                                                 BindingFlags.Public))
+        {
+             Debug.Log(string.Format("{0} = {1}", field.Name, field.GetValue(order)));
+        }
     }
 
     void OnMouseDown()
     {
         animator.SetTrigger("BellPress");
 
-        if (serveZone.TargetCup == null)
+        if (!customer.HasOrdered || serveZone.TargetCup == null)
         {
             return;
         }
@@ -85,5 +110,6 @@ public class BellController : MonoBehaviour
     {
         yield return new WaitForSeconds(cameraDelayDuration);
         cameraController.FollowServe();
+        GameController.SharedInstance.dialogueManager.EndDialogue();
     }
 }

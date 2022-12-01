@@ -36,12 +36,15 @@ public struct Order
             hasOatMilk = milkType == 2,
             sugarCount = Utils.Random.Next(5),
             hasSpoon = Utils.Random.Next(2) == 0,
+            hasWater = true,
         };
     }
 }
 
 public class GameController : MonoBehaviour
 {
+    public CustomerController currentCustomer;
+
     [SerializeField]
     public LayerMask cameraEventMask;
 
@@ -51,6 +54,8 @@ public class GameController : MonoBehaviour
     public DialogueManager dialogueManager;
     public DialogueTrigger dialogueTrigger;
     public float despawnTimeInSecAfterDisdard = 1.5f;
+
+    public CustomerController CurrentCustomer { get => currentCustomer; }
 
     void Start()
     {

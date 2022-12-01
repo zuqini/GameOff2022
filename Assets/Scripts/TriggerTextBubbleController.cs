@@ -38,7 +38,7 @@ public class TriggerTextBubbleController : MonoBehaviour
     IEnumerator StartDialogue()
     {
         yield return new WaitForSeconds(despawnTimeInSecs);
-        GameController.SharedInstance.dialogueManager.StartDialogue(new List<Dialogue> { customer.GenerateOrderDialogueByText() });
+        GameController.SharedInstance.dialogueManager.StartDialogue(new List<Dialogue> { customer.GenerateOrderDialogueText() });
     }
 
     void OnMouseUp()

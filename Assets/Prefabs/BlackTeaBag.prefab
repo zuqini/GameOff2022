@@ -559,7 +559,7 @@ GameObject:
   - component: {fileID: 2966724701142385223}
   m_Layer: 10
   m_Name: Bag
-  m_TagString: TeaBag
+  m_TagString: BlackTeaBag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1505,6 +1505,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 2966724701748009173}
+  shouldStabilize: 0
+  stabilizationSpeed: 500
+  targetStabilizationRotation: 0
+  shouldRotateWithItem: 0
 --- !u!61 &2966724701553276125
 BoxCollider2D:
   m_ObjectHideFlags: 0

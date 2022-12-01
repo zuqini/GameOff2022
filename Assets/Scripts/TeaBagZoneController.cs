@@ -6,11 +6,24 @@ public class TeaBagZoneController : MonoBehaviour
 {
     private List<TeaBagController> teabags;
     private List<Rigidbody2D> stirs;
-    public Transform teaBagConstrainer;
-    public Rigidbody2D cup;
 
+    private int stirCount = 0;
+    private int sugarCount = 0;
+    private int blackTeaCount = 0;
+    private int herbalTeaCount = 0;
+    private int lightTeaCount = 0;
+
+    public Transform teaBagConstrainer;
+
+    public Rigidbody2D cup;
     public float stirSpeed = 200f;
     public float stirAngle = -60f;
+
+    public int StirCount { get => stirCount; }
+    public int BlackTeaCount { get => blackTeaCount; }
+    public int HerbalTeaCount { get => herbalTeaCount; }
+    public int LightTeaCount { get => lightTeaCount; }
+    public int SugarCount { get => sugarCount; }
 
     void Start()
     {
@@ -47,7 +60,9 @@ public class TeaBagZoneController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "TeaBag")
+        if (other.gameObject.tag == "BlackTeaBag" || 
+                other.gameObject.tag == "HerbalTeaBag" ||
+                other.gameObject.tag == "LightTeaBag")
         {
             var teabag = other.gameObject.GetComponent<TeaBagController>();
             var renderer = other.gameObject.GetComponent<Renderer>();
@@ -55,11 +70,16 @@ public class TeaBagZoneController : MonoBehaviour
             teabag.draggable.IsEnabled = false;
             teabags.Add(teabag);
             other.enabled = false;
+
+            if (other.gameObject.tag == "BlackTeaBag") blackTeaCount++;
+            if (other.gameObject.tag == "HerbalTeaBag") herbalTeaCount++;
+            if (other.gameObject.tag == "LightTeaBag") lightTeaCount++;
         }
 
         if (other.gameObject.tag == "Sugar")
         {
             other.transform.parent.gameObject.SetActive(false);
+            sugarCount++;
         }
 
         if (other.gameObject.tag == "Stir")
@@ -69,6 +89,7 @@ public class TeaBagZoneController : MonoBehaviour
             stirs.Add(stir);
             // other.enabled = false;
             draggable.IsEnabled = false;
+            stirCount++;
         }
     }
 

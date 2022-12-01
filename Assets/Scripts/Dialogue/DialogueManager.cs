@@ -19,6 +19,9 @@ public class DialogueManager : MonoBehaviour
     private string currentSentence;
     private float elapsedTime = Mathf.Infinity;
     private bool finishedSentence = true;
+    private bool shouldEnd = false;
+
+    public bool ShouldEnd { get => shouldEnd; set => shouldEnd = value; }
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +65,7 @@ public class DialogueManager : MonoBehaviour
         }
         if (dialogueIndex >= dialogue.Count)
         {
-            // EndDialogue();
+            if (shouldEnd) EndDialogue();
             return;
         }
 
@@ -85,10 +88,15 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
+        if (shouldEnd) {
+            GameController.SharedInstance.CurrentCustomer.Exit();
+        }
         dialogue = null;
         dialogueIndex = 0;
         sentenceIndex = 0;
-        dialogueBox.alpha = 0;
+        shouldEnd = false;
+        finishedSentence = true;
         // bring down dialogue box
+        anim.SetTrigger("DespawnDialogue");
     }
 }

@@ -96,4 +96,19 @@ public class CupController : MonoBehaviour
                 return false;
         }
     }
+     public Order GetOrder()
+     {
+        var order = new Order {
+            hasMilk = milk >= nonWaterLiquidCapacityInSec - 0.005,
+            hasOatMilk = oatMilk >= nonWaterLiquidCapacityInSec - 0.005,
+            hasHoney = honey >= nonWaterLiquidCapacityInSec - 0.005,
+            hasWater = water >= waterCapacityInSec - 0.005,
+            sugarCount = teabagZone.SugarCount,
+            blackTea = teabagZone.BlackTeaCount,
+            herbTea = teabagZone.HerbalTeaCount,
+            lightTea = teabagZone.LightTeaCount,
+            hasSpoon = teabagZone.StirCount > 0,
+        };
+        return order;
+     }
 }

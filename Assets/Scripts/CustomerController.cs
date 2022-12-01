@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class CustomerController : MonoBehaviour
 {
     private SpriteRenderer sprite;
+    private string customerName = "Jane Doe";
     private float timeElapsed = Mathf.Infinity;
     private float colorTimeElapsed = Mathf.Infinity;
-    private bool positionInitialized = false;
-    private bool dialogueInitialized = false;
+    private bool firstPhase = false;
+    private bool secondPhase = false;
+    private bool hasOrdered = false;
+    private bool exiting = false;
     private Order order;
 
     private List<string> greetings = new List<string>();
@@ -26,20 +30,66 @@ public class CustomerController : MonoBehaviour
     private List<string> spoon = new List<string>();
     private List<string> ender = new List<string>();
 
+    private List<string> happyOrder = new List<string>();
+    private List<string> sadOrder = new List<string>();
+    private List<string> sadOrderEnder = new List<string>();
+
+    public Sprite[] maleSpriteArray;
+    public Sprite[] femaleSpriteArray;
+    public string[] maleNames;
+    public string[] femaleNames;
     public float lerpDuration = 1f;
     public float colorLerpDuration = 1f;
     public Transform startPosition;
     public Transform targetPosition;
     public TriggerTextBubbleController triggerTextBubble;
-    public string customerName = "Jane Doe";
+
+    public bool HasOrdered { get => hasOrdered; }
+    public Order Order { get => order; }
+
+    // @TODO: refactor this
+    private void PickNewCharacter()
+    {
+        var character = Utils.Random.Next(8);
+        var gender = Utils.Random.Next(2);
+        if (gender == 0) {
+            if (femaleNames[character] == customerName) {
+                PickNewCharacter();
+                return;
+            }
+            sprite.sprite = femaleSpriteArray[character];
+            customerName =  femaleNames[character];
+        } else {
+            if (maleNames[character] == customerName) {
+                PickNewCharacter();
+                return;
+            }
+            sprite.sprite = maleSpriteArray[character];
+            customerName =  maleNames[character];
+        }
+    }
 
     public void Init()
     {
+        PickNewCharacter();
+        exiting =  false;
         sprite.color = Color.black;
         timeElapsed = 0;
+        firstPhase = false;
+        secondPhase = false;
+        hasOrdered = false;
+        exiting = false;
 
         order = Order.RandomBasic();
+    }
 
+    public void Exit()
+    {
+        firstPhase = false;
+        secondPhase = false;
+        exiting = true;
+        sprite.color = Color.white;
+        colorTimeElapsed = 0;
     }
 
     void Start()
@@ -64,11 +114,11 @@ public class CustomerController : MonoBehaviour
 
         lightStr.Add("Just one tea bag is fine.\n");
         mediumStr.Add("Make it a teeny bit stronger than usual.\n");
-        heavyStr.Add("Make it strong for me!\n");
+        heavyStr.Add("Make it really really strong for me!\n");
 
         additives.Add("Can I also get ");
         honey.Add("a bit of honey");
-        sugar.Add("{0} sugar cubes");
+        sugar.Add("{0} sugar cube");
         milk.Add("a splash of milk");
         oatmilk.Add("a splash of oatmilk");
         spoon.Add("a small stir spoon");
@@ -76,38 +126,136 @@ public class CustomerController : MonoBehaviour
         ender.Add("Thanks.");
         ender.Add("Thanks a bunch!");
         ender.Add("Really appreciate it!");
+
+        happyOrder.Add("This is just perfect. I love it!");
+        happyOrder.Add("Wow, you didn't screw it up like Starpucks did. Awesome!");
+        happyOrder.Add("I'm totally gonna rate this place 5 stars on Coocle.com!");
+
+        sadOrder.Add("Ewww! What is this?\n");
+        sadOrder.Add("What the heck!\n");
+        sadOrder.Add("Umm, this is not what I asked for..\n");
+
+        sadOrderEnder.Add("I'm sad...");
+        sadOrderEnder.Add("I'm only gonna go to Starpucks from now on.");
+        sadOrderEnder.Add("I'm gonna rate this place 0 stars on Coocle.com...");
     }
 
     void FixedUpdate()
     {
-        if (timeElapsed < lerpDuration)
+        if (exiting)
         {
-            var dt = Mathfx.Hermite(0, 1, timeElapsed / lerpDuration);
-            var targetPos = Vector3.Lerp(startPosition.position, targetPosition.position, dt);
-            transform.position = targetPos;
+            if (colorTimeElapsed < colorLerpDuration)
+            {
+                var dt = Mathfx.Hermite(0, 1, colorTimeElapsed / colorLerpDuration);
+                sprite.color = Color.Lerp(Color.white, Color.black, dt);
 
-            timeElapsed += Time.deltaTime;
-        } else if (!positionInitialized) {
-            transform.position = targetPosition.position;
-            colorTimeElapsed = 0;
-            positionInitialized = true;
-        }
+                colorTimeElapsed += Time.deltaTime;
+            } else if (!firstPhase) {
+                sprite.color = Color.black;
+                timeElapsed = 0;
+                firstPhase = true;
+            }
 
-        if (colorTimeElapsed < colorLerpDuration)
-        {
-            var dt = Mathfx.Hermite(0, 1, colorTimeElapsed / colorLerpDuration);
-            sprite.color = Color.Lerp(Color.black, Color.white, dt);
+            if (timeElapsed < lerpDuration)
+            {
+                var dt = Mathfx.Hermite(0, 1, timeElapsed / lerpDuration);
+                var targetPos = Vector3.Lerp(targetPosition.position, startPosition.position, dt);
+                transform.position = targetPos;
 
-            colorTimeElapsed += Time.deltaTime;
-        } else if (positionInitialized && !dialogueInitialized) {
-            sprite.color = Color.white;
-            triggerTextBubble.Spawn();
-            dialogueInitialized = true;
+                timeElapsed += Time.deltaTime;
+            } else if (firstPhase && !secondPhase) {
+                transform.position = startPosition.position;
+                secondPhase = true;
+                Init();
+            }
+        } else {
+            if (timeElapsed < lerpDuration)
+            {
+                var dt = Mathfx.Hermite(0, 1, timeElapsed / lerpDuration);
+                var targetPos = Vector3.Lerp(startPosition.position, targetPosition.position, dt);
+                transform.position = targetPos;
+
+                timeElapsed += Time.deltaTime;
+            } else if (!firstPhase) {
+                transform.position = targetPosition.position;
+                colorTimeElapsed = 0;
+                firstPhase = true;
+            }
+
+            if (colorTimeElapsed < colorLerpDuration)
+            {
+                var dt = Mathfx.Hermite(0, 1, colorTimeElapsed / colorLerpDuration);
+                sprite.color = Color.Lerp(Color.black, Color.white, dt);
+
+                colorTimeElapsed += Time.deltaTime;
+            } else if (firstPhase && !secondPhase) {
+                sprite.color = Color.white;
+                triggerTextBubble.Spawn();
+                secondPhase = true;
+            }
         }
     }
 
-    public Dialogue GenerateOrderDialogueByText()
+    public Dialogue GenerateOrderComparisonText(Order cupOrder)
     {
+        hasOrdered = true;
+        var dialogue = new List<string>();
+        if (cupOrder.Equals(order))
+        {
+            dialogue.Add(GetRandomDialogueLine(happyOrder));
+        }
+        else
+        {
+            dialogue.Add(GetRandomDialogueLine(sadOrder));
+
+            if (order.blackTea != cupOrder.blackTea)
+            {
+                dialogue.Add(string.Format("I wanted {0} black teabag{1}, but you gave me {2}.\n", order.blackTea, order.blackTea > 1 ? "s" : "", cupOrder.blackTea == 0 ? "none" : cupOrder.blackTea));
+            }
+            if (order.herbTea != cupOrder.herbTea)
+            {
+                dialogue.Add(string.Format("I wanted {0} herbal teabag{1}, but you gave me {2}.\n", order.herbTea, order.herbTea > 1 ? "s" : "", cupOrder.herbTea == 0 ? "none" : cupOrder.herbTea));
+            }
+            if (order.lightTea != cupOrder.lightTea)
+            {
+                dialogue.Add(string.Format("I wanted {0} light teabag{1}, but you gave me {2}.\n", order.lightTea, order.lightTea > 1 ? "s" : "", cupOrder.lightTea == 0 ? "none" : cupOrder.lightTea));
+            }
+            if (order.hasHoney != cupOrder.hasHoney)
+            {
+                dialogue.Add(string.Format("I wanted {0}honey, but you gave me {1}.\n", order.hasHoney ? " " : "no " , cupOrder.hasHoney ? "honey" : "none"));
+            }
+            if (order.sugarCount != cupOrder.sugarCount)
+            {
+                dialogue.Add(string.Format("I wanted {0} sugar cube{1}, but you gave me {2}.\n", order.sugarCount, order.sugarCount > 1  ? "s" : "", cupOrder.sugarCount == 0 ? "none" : cupOrder.sugarCount));
+            }
+            if (order.hasMilk != cupOrder.hasMilk)
+            {
+                dialogue.Add(string.Format("I wanted {0}milk, but you gave me {1}.\n", order.hasMilk ? " " : "no " , cupOrder.hasMilk ? "honey" : "none"));
+            }
+            if (order.hasOatMilk != cupOrder.hasOatMilk)
+            {
+                dialogue.Add(string.Format("I wanted {0}oatmilk, but you gave me {1}.\n", order.hasOatMilk ? " " : "no ", cupOrder.hasOatMilk ? "oatmilk" : "none"));
+            }
+            if (order.hasSpoon != cupOrder.hasSpoon)
+            {
+                dialogue.Add(string.Format("I wanted {0}spoon, but you gave me {1}.\n", order.hasSpoon ? "a  " : "no ", cupOrder.hasOatMilk ? "one anyway" : "none"));
+            }
+            if (!cupOrder.hasWater)
+            {
+                dialogue.Add("The cup doesn't even have water in it. What do you even do here?\n");
+            }
+            dialogue.Add(GetRandomDialogueLine(sadOrderEnder));
+        }
+
+        return new Dialogue {
+            name = customerName,
+            sentences = new string[] { string.Join("", dialogue) },
+        };
+    }
+
+    public Dialogue GenerateOrderDialogueText()
+    {
+        hasOrdered = true;
         var dialogue = new List<string>();
         dialogue.Add(GetRandomDialogueLine(greetings));
         if (order.blackTea > 0) {
@@ -138,6 +286,10 @@ public class CustomerController : MonoBehaviour
             }
             if (order.sugarCount > 0) {
                 dialogue.Add(string.Format(GetRandomDialogueLine(sugar), order.sugarCount));
+                // lol timecrunch jank, @TODO refactor all this shit please
+                if (order.sugarCount > 1) {
+                    dialogue.Add("s");
+                }
                 numCurrentItems++;
                 AddConjunction(dialogue, numCurrentItems, numItems);
             }
