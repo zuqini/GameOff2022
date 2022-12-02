@@ -19,6 +19,7 @@ public class Draggable : MonoBehaviour
     public float stabilizationSpeed = 500f;
     public float targetStabilizationRotation = 0f;
     public bool shouldRotateWithItem = false;
+    public bool canBeDiscarded = true;
     public bool IsDragging { get => isDragging; set => isDragging = value; }
     public bool IsEnabled { get => isEnabled; set => isEnabled = value; }
 
@@ -146,7 +147,7 @@ public class Draggable : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag != "Discard")
+        if (!canBeDiscarded || other.gameObject.tag != "Discard")
         {
             return;
         }
@@ -156,7 +157,7 @@ public class Draggable : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.tag != "Discard")
+        if (!canBeDiscarded || other.gameObject.tag != "Discard")
         {
             return;
         }

@@ -248,7 +248,7 @@ public class CustomerController : MonoBehaviour
             {
                 dialogue.Add(string.Format("I wanted {0}oatmilk, but you gave me {1}.\n", order.hasOatMilk ? " " : "no ", cupOrder.hasOatMilk ? "oatmilk" : "none"));
             }
-            if (order.hasSpoon != cupOrder.hasSpoon)
+            if (order.hasSpoon && !cupOrder.hasSpoon)
             {
                 dialogue.Add(string.Format("I wanted {0}spoon, but you gave me {1}.\n", order.hasSpoon ? "a  " : "no ", cupOrder.hasOatMilk ? "one anyway" : "none"));
             }

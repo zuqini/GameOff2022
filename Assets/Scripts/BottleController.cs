@@ -7,8 +7,8 @@ public class BottleController : MonoBehaviour
     private Rigidbody2D rb;
     private AudioSource pourSound;
 
-    private float startAngle;
-    private float targetAngle;
+    private float startAngle = 0;
+    private float targetAngle = -20;
     private float rotationTimeElapsed = Mathf.Infinity;
     private bool isRotating = false;
 
@@ -35,17 +35,25 @@ public class BottleController : MonoBehaviour
 
     void FixedUpdate()
     {
-        var shouldPour = draggable.IsDragging && pourZone.TargetCup != null && !pourZone.TargetCup.IsFullLiquid(liquidType);
+        if (!draggable.IsDragging) {
+            startAngle = 0;
+            targetAngle = -20;
+            rotationTimeElapsed = Mathf.Infinity;
+            rb.SetRotation(0);
+            return;
+        }
+
+        var shouldPour = pourZone.TargetCup != null && !pourZone.TargetCup.IsFullLiquid(liquidType);
         // Debug.Log(pourZone.TargetCup);
         if (shouldPour && !isRotating)
         {
             isRotating = true;
-            setTargetRotation(pourAngle);
+            setTargetRotation(-20, pourAngle);
         }
         else if (!shouldPour && isRotating)
         {
             isRotating = false;
-            setTargetRotation(0);
+            setTargetRotation(pourAngle, -20);
         }
 
         var isPouring = isRotating && targetAngle == rb.rotation;
@@ -74,10 +82,10 @@ public class BottleController : MonoBehaviour
         }
     }
 
-    private void setTargetRotation(float target)
+    private void setTargetRotation(float start, float target)
     {
         targetAngle = target;
-        startAngle = rb.rotation;
+        startAngle = start;
         rotationTimeElapsed = 0;
     }
 }
