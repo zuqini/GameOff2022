@@ -16,6 +16,7 @@ public class CustomerController : MonoBehaviour
     private bool exiting = false;
     private Order order;
 
+    // @TODO: for the love of god refactor this shit
     private List<string> greetings = new List<string>();
     private List<string> blacktea = new List<string>();
     private List<string> herbaltea = new List<string>();
@@ -30,6 +31,7 @@ public class CustomerController : MonoBehaviour
     private List<string> oatmilk = new List<string>();
     private List<string> spoon = new List<string>();
     private List<string> ender = new List<string>();
+    private List<string> enderender = new List<string>();
 
     private List<string> happyOrder = new List<string>();
     private List<string> sadOrder = new List<string>();
@@ -136,6 +138,11 @@ public class CustomerController : MonoBehaviour
         ender.Add("Thanks.");
         ender.Add("Thanks a bunch!");
         ender.Add("Really appreciate it!");
+
+        enderender.Add("Ummm.. Did you get all that?");
+        enderender.Add("I'll be waiting here then!");
+        enderender.Add("Hope you won't neen me to repeat that!");
+        enderender.Add("Can't wait!");
 
         happyOrder.Add("This is just perfect. I love it!");
         happyOrder.Add("Wow, you didn't screw it up like Starpucks did. Awesome!");
@@ -265,9 +272,10 @@ public class CustomerController : MonoBehaviour
         };
     }
 
-    public Dialogue GenerateOrderDialogueText()
+    public List<Dialogue> GenerateOrderDialogueText()
     {
         hasOrdered = true;
+        var dialogues = new List<Dialogue>();
         var dialogue = new List<string>();
         dialogue.Add(GetRandomDialogueLine(greetings));
         if (order.blackTea > 0) {
@@ -323,9 +331,23 @@ public class CustomerController : MonoBehaviour
         }
 
         dialogue.Add(GetRandomDialogueLine(ender));
-        return new Dialogue {
-            name = customerName,
-            sentences = new string[] { string.Join("", dialogue) },
+        // @TODO: expand canvas dinamically by string length
+        return new List<Dialogue> {
+            new Dialogue {
+                name = customerName,
+                sentences = new string[] { 
+                    string.Join("", dialogue),
+                    "... ",
+                    "... ",
+                    "... ",
+                },
+            },
+            new Dialogue {
+                name = customerName,
+                sentences = new string[] { 
+                    GetRandomDialogueLine(enderender),
+                },
+            },
         };
     }
 

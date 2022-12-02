@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     private string currentSentence;
     private float elapsedTime = Mathf.Infinity;
     private bool finishedSentence = true;
+    private bool finishedDialogue = true;
     private bool shouldEnd = false;
 
     public bool ShouldEnd { get => shouldEnd; set => shouldEnd = value; }
@@ -33,6 +34,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (finishedSentence || string.IsNullOrEmpty(currentSentence))
         {
+            // load next sentence
             return;
         }
         elapsedTime += Time.deltaTime;
