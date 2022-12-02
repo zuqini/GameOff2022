@@ -33,17 +33,17 @@ public class KettleLeverController : MonoBehaviour
             if (kettle.IsOnKettleBase && !kettle.IsMaxTemperature())
             {
                 kettle.RaiseTemperature(Time.deltaTime);
-                if (kettle.IsHot() && !audioSource.isPlaying)
-                {
-                    audioSource.volume = 0.3f;
-                    audioSource.PlayOneShot(boilSound);
-                }
             } else {
                 animator.SetBool("IsPressed", false);
-                audioSource.Stop();
                 audioSource.volume = 1;
                 audioSource.PlayOneShot(clickSound);
+                audioSource.volume = 0.3f;
+                audioSource.PlayOneShot(boilSound);
             }
+        }
+        if (!kettle.IsHot() && audioSource.isPlaying)
+        {
+            audioSource.Stop();
         }
     }
 
