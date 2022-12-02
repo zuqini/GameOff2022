@@ -257,7 +257,7 @@ public class CustomerController : MonoBehaviour
             }
             if (order.hasSpoon && !cupOrder.hasSpoon)
             {
-                dialogue.Add(string.Format("I wanted {0}spoon, but you gave me {1}.\n", order.hasSpoon ? "a  " : "no ", cupOrder.hasOatMilk ? "one anyway" : "none"));
+                dialogue.Add(string.Format("I wanted {0}spoon, but you gave me {1}.\n", order.hasSpoon ? "a " : "no ", cupOrder.hasOatMilk ? "one anyway" : "none"));
             }
             if (!cupOrder.hasWater)
             {
@@ -332,20 +332,28 @@ public class CustomerController : MonoBehaviour
 
         dialogue.Add(GetRandomDialogueLine(ender));
         // @TODO: expand canvas dinamically by string length
+        // return new List<Dialogue> {
+        //     new Dialogue {
+        //         name = customerName,
+        //         sentences = new string[] { 
+        //             string.Join("", dialogue),
+        //             "... ",
+        //             "... ",
+        //             "... ",
+        //         },
+        //     },
+        //     new Dialogue {
+        //         name = customerName,
+        //         sentences = new string[] { 
+        //             GetRandomDialogueLine(enderender),
+        //         },
+        //     },
+        // };
         return new List<Dialogue> {
             new Dialogue {
                 name = customerName,
                 sentences = new string[] { 
                     string.Join("", dialogue),
-                    "... ",
-                    "... ",
-                    "... ",
-                },
-            },
-            new Dialogue {
-                name = customerName,
-                sentences = new string[] { 
-                    GetRandomDialogueLine(enderender),
                 },
             },
         };

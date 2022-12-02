@@ -6,6 +6,7 @@ public class KettleLeverController : MonoBehaviour
 {
     private Animator animator;
     private AudioSource audioSource;
+    private bool boilingTemp = false;
 
     public AudioClip boilSound;
     public AudioClip clickSound;
@@ -37,12 +38,17 @@ public class KettleLeverController : MonoBehaviour
                 animator.SetBool("IsPressed", false);
                 audioSource.volume = 1;
                 audioSource.PlayOneShot(clickSound);
-                audioSource.volume = 0.3f;
-                audioSource.PlayOneShot(boilSound);
+                if (kettle.IsMaxTemperature())
+                {
+                    boilingTemp = true;
+                    audioSource.volume = 0.3f;
+                    audioSource.PlayOneShot(boilSound);
+                }
             }
         }
-        if (!kettle.IsHot() && audioSource.isPlaying)
+        if (boilingTemp && !kettle.IsHot() && audioSource.isPlaying)
         {
+            boilingTemp = false;
             audioSource.Stop();
         }
     }

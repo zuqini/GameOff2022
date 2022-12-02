@@ -5,9 +5,13 @@ using UnityEngine;
 public class CameraCursorController : MonoBehaviour
 {
     public CameraController cameraController;
+    public bool goToRight = true;
 
     void OnMouseDown()
     {
-        cameraController.FollowBrew();
+        if (goToRight)
+            cameraController.FollowBrew();
+        else
+            cameraController.FollowServe();
     }
 }
