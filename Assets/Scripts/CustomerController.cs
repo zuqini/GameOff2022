@@ -332,31 +332,31 @@ public class CustomerController : MonoBehaviour
 
         dialogue.Add(GetRandomDialogueLine(ender));
         // @TODO: expand canvas dinamically by string length
-        // return new List<Dialogue> {
-        //     new Dialogue {
-        //         name = customerName,
-        //         sentences = new string[] { 
-        //             string.Join("", dialogue),
-        //             "... ",
-        //             "... ",
-        //             "... ",
-        //         },
-        //     },
-        //     new Dialogue {
-        //         name = customerName,
-        //         sentences = new string[] { 
-        //             GetRandomDialogueLine(enderender),
-        //         },
-        //     },
-        // };
         return new List<Dialogue> {
             new Dialogue {
                 name = customerName,
-                sentences = new string[] { 
+                sentences = new string[] {
                     string.Join("", dialogue),
+                    "... ",
+                    "... ",
+                    "... ",
+                },
+            },
+            new Dialogue {
+                name = customerName,
+                sentences = new string[] {
+                    GetRandomDialogueLine(enderender),
                 },
             },
         };
+        // return new List<Dialogue> {
+        //     new Dialogue {
+        //         name = customerName,
+        //         sentences = new string[] {
+        //             string.Join("", dialogue),
+        //         },
+        //     },
+        // };
     }
 
     private void AddConjunction(List<string> dialogue, int numCurrentItems, int numItems)
