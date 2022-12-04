@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// @TODO need to refactor the spaghetti logic
 public class DialogueManager : MonoBehaviour
 {
     public CanvasGroup dialogueBox;
     public Canvas canvas;
     public TMP_Text nameText;
     public TMP_Text dialogueText;
-    public float charDisplaySpeed = 1f/10f; // 10 char per second
+    public float defaultCharDelayInSec = 0.02f;
 
     private List<Dialogue> dialogue;
     private List<string> displayedSentences;
@@ -69,7 +70,7 @@ public class DialogueManager : MonoBehaviour
         }
         if (dialogueIndex >= dialogue.Count)
         {
-            if (shouldEnd) EndDialogue();
+            // if (shouldEnd) EndDialogue();
             return;
         }
 
@@ -103,16 +104,26 @@ public class DialogueManager : MonoBehaviour
         anim.SetTrigger("DespawnDialogue");
     }
 
+    public void OnDialogueClick()
+    {
+        if (shouldEnd) EndDialogue();
+    }
+
     private IEnumerator DisplayNextCharacter()
     {
         var currentDialogue = dialogue[dialogueIndex];
         var currentSentence = currentDialogue.sentences[sentenceIndex];
         while (true)
         {
-            yield return new WaitForSeconds(charDisplaySpeed);
             characterIndex++;
-            if (characterIndex > currentSentence.Length) {
-                displayedSentences.Add(currentSentence);
+            // Debug.Log("Displaying char: "+currentSentence.sentence[characterIndex - 1]);
+            while (characterIndex <= currentSentence.sentence.Length && char.IsWhiteSpace(currentSentence.sentence[characterIndex - 1]))
+            {
+                // Debug.Log("isWhiteSpaece");
+                characterIndex++;
+            }
+            if (characterIndex > currentSentence.sentence.Length) {
+                displayedSentences.Add(currentSentence.sentence);
                 sentenceIndex++;
                 characterIndex = 0;
                 if (sentenceIndex >= currentDialogue.sentences.Length)
@@ -125,8 +136,10 @@ public class DialogueManager : MonoBehaviour
                     break;
                 }
                 currentSentence = currentDialogue.sentences[sentenceIndex];
+            } else {
+                yield return new WaitForSeconds(currentSentence.sentenceCharDelayInSec >= 0 ? currentSentence.sentenceCharDelayInSec : defaultCharDelayInSec);
             }
-            dialogueText.SetText(string.Format("{0}{1}",string.Join("", displayedSentences), currentDialogue.sentences[sentenceIndex].Substring(0, characterIndex)));
+            dialogueText.SetText(string.Format("{0}{1}",string.Join("", displayedSentences), currentSentence.sentence.Substring(0, characterIndex)));
         }
     }
 }

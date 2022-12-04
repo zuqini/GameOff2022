@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Dialogue
+public class DialogueSentence
 {
-    public string name;
+    public float sentenceCharDelayInSec = -1;
 
     [TextArea(3, 10)]
-    public DialogueSentence[] sentences;
+    public string sentence;
 }
+

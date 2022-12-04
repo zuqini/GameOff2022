@@ -141,7 +141,7 @@ public class CustomerController : MonoBehaviour
 
         enderender.Add("Ummm.. Did you get all that?");
         enderender.Add("I'll be waiting here then!");
-        enderender.Add("Hope you won't neen me to repeat that!");
+        enderender.Add("Hope you won't need me to repeat that!");
         enderender.Add("Can't wait!");
 
         happyOrder.Add("This is just perfect. I love it!");
@@ -221,6 +221,7 @@ public class CustomerController : MonoBehaviour
         {
             audioSource.PlayOneShot(success);
             dialogue.Add(GetRandomDialogueLine(happyOrder));
+            GameController.SharedInstance.AdvanceLevel();
         }
         else
         {
@@ -268,7 +269,11 @@ public class CustomerController : MonoBehaviour
 
         return new Dialogue {
             name = customerName,
-            sentences = new string[] { string.Join("", dialogue) },
+            sentences = new DialogueSentence[] {
+                new DialogueSentence {
+                    sentence = string.Join("", dialogue),
+                },
+            },
         };
     }
 
@@ -331,22 +336,37 @@ public class CustomerController : MonoBehaviour
         }
 
         dialogue.Add(GetRandomDialogueLine(ender));
+        dialogue.Add("\n");
+
         // @TODO: expand canvas dinamically by string length
         return new List<Dialogue> {
             new Dialogue {
                 name = customerName,
-                sentences = new string[] {
-                    string.Join("", dialogue),
-                    "... ",
-                    "... ",
-                    "... ",
+                sentences = new DialogueSentence[] {
+                    new DialogueSentence {
+                        sentence = string.Join("", dialogue),
+                    },
+                    new DialogueSentence {
+                        sentence = "...\n",
+                        sentenceCharDelayInSec = 1f/2f,
+                    },
+                    new DialogueSentence {
+                        sentence =  "...\n",
+                        sentenceCharDelayInSec = 1f/2f,
+                    },
+                    new DialogueSentence {
+                        sentence =  "...\n",
+                        sentenceCharDelayInSec = 1f/2f,
+                    },
                 },
             },
             new Dialogue {
                 name = customerName,
-                sentences = new string[] {
-                    GetRandomDialogueLine(enderender),
-                },
+                sentences = new DialogueSentence[] {
+                    new DialogueSentence {
+                        sentence = GetRandomDialogueLine(enderender),
+                    },
+                }
             },
         };
         // return new List<Dialogue> {
