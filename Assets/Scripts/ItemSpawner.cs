@@ -45,7 +45,6 @@ public class ItemSpawner : MonoBehaviour
                 cupController.ResetCup();
                 currentDraggable.PlayDragSound();
             }
-
         }
     }
 

@@ -78,6 +78,7 @@ public class BellController : MonoBehaviour
 
         GameController.SharedInstance.dialogueManager.ShouldEnd = true;
         GameController.SharedInstance.dialogueManager.StartDialogue(new List<Dialogue> { customer.GenerateOrderComparisonText(cupController.GetOrder()) });
+        GameController.SharedInstance.AdvanceLevel();
     }
 
     private void PrintOrder(Order order)

@@ -99,6 +99,7 @@ public class DialogueManager : MonoBehaviour
         displayedSentences.Clear();
         dialogueIndex = 0;
         sentenceIndex = 0;
+        characterIndex = 0;
         shouldEnd = false;
         // bring down dialogue box
         anim.SetTrigger("DespawnDialogue");

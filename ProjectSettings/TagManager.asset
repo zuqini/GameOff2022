@@ -17,6 +17,7 @@ TagManager:
   - Milk
   - Honey
   - Stir
+  - LevelUI
   layers:
   - Default
   - TransparentFX

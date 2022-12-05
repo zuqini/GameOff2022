@@ -219,12 +219,15 @@ public class CustomerController : MonoBehaviour
         var dialogue = new List<string>();
         if (cupOrder.Equals(order))
         {
+            // this winning management code should not live in customer
+            // @TODO: refactor
+            GameController.SharedInstance.levelUIController.SetCurrentLevelWin();
             audioSource.PlayOneShot(success);
             dialogue.Add(GetRandomDialogueLine(happyOrder));
-            GameController.SharedInstance.AdvanceLevel();
         }
         else
         {
+            GameController.SharedInstance.levelUIController.SetCurrentLevelLose();
             audioSource.PlayOneShot(failure);
             dialogue.Add(GetRandomDialogueLine(sadOrder));
 

@@ -117,7 +117,7 @@ public struct Order
 public class GameController : MonoBehaviour
 {
     private int difficultyLevel = 1;
-    private int level = 1;
+    private int level = 0;
 
     public CustomerController currentCustomer;
 
@@ -128,15 +128,17 @@ public class GameController : MonoBehaviour
     public LevelLoader levelLoader;
     public Camera cam;
     public DialogueManager dialogueManager;
-    public DialogueTrigger dialogueTrigger;
+    public LevelUIController levelUIController;
     public float despawnTimeInSecAfterDisdard = 1.5f;
 
     public CustomerController CurrentCustomer { get => currentCustomer; }
     public int DifficultyLevel { get => difficultyLevel; }
+    public int Level { get => level; }
 
     void Start()
     {
         cam.eventMask = cameraEventMask;
+        AdvanceLevel();
     }
 
     void Awake()
@@ -167,5 +169,6 @@ public class GameController : MonoBehaviour
         level++;
         difficultyLevel = 1 + level / 3;
         Debug.Log(string.Format("level: {0}, difficulty: {1}", level, difficultyLevel));
+        levelUIController.GenerateCurrentLevel();
     }
 }
