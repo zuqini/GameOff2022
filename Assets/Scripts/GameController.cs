@@ -167,7 +167,7 @@ public class GameController : MonoBehaviour
     public void AdvanceLevel()
     {
         level++;
-        difficultyLevel = 1 + level / 3;
+        difficultyLevel = 1 + level / 2;
         Debug.Log(string.Format("level: {0}, difficulty: {1}", level, difficultyLevel));
         levelUIController.GenerateCurrentLevel();
     }
