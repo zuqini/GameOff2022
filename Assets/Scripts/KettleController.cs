@@ -16,7 +16,7 @@ public class KettleController : MonoBehaviour
     private bool isRotating = false;
     private float waterLevel;
     private bool isOnKettleBase = true;
-    private float waterTemperature = 0;
+    private float waterTemperature = 100;
 
     private Vector3 startPos;
     private float latchTimeElapsed = Mathf.Infinity;
@@ -179,7 +179,7 @@ public class KettleController : MonoBehaviour
 
     public bool IsUnlatched()
     {
-        return !kettleLever.IsLeverDown() && IsHot();
+        return IsHot();
     }
 
     public bool IsHot()

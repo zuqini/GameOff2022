@@ -22,6 +22,7 @@ public class DialogueManager : MonoBehaviour
     private float elapsedTime = Mathf.Infinity;
     private bool finishedDialogue = true;
     private bool shouldEnd = false;
+    private IEnumerator currentDialogueCoroutine;
 
     public bool ShouldEnd { get => shouldEnd; set => shouldEnd = value; }
 
@@ -87,13 +88,19 @@ public class DialogueManager : MonoBehaviour
 
         nameText.SetText(speaker.name);
         elapsedTime = 0;
-        StartCoroutine(DisplayNextCharacter());
+        currentDialogueCoroutine = DisplayNextCharacter();
+        StartCoroutine(currentDialogueCoroutine);
     }
 
     public void EndDialogue()
     {
         if (shouldEnd) {
             GameController.SharedInstance.CurrentCustomer.Exit();
+        }
+        if (currentDialogueCoroutine != null)
+        {
+            StopCoroutine(currentDialogueCoroutine);
+            currentDialogueCoroutine = null;
         }
         dialogue = null;
         displayedSentences.Clear();
@@ -140,6 +147,8 @@ public class DialogueManager : MonoBehaviour
             } else {
                 yield return new WaitForSeconds(currentSentence.sentenceCharDelayInSec >= 0 ? currentSentence.sentenceCharDelayInSec : defaultCharDelayInSec);
             }
+            // Debug.Log(currentSentence.sentence);
+            // Debug.Log(characterIndex);
             dialogueText.SetText(string.Format("{0}{1}",string.Join("", displayedSentences), currentSentence.sentence.Substring(0, characterIndex)));
         }
     }

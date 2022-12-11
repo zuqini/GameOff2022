@@ -54,15 +54,16 @@ public class BellController : MonoBehaviour
             cupController.teabagZone.SetStirCollider(false);
             cupController.Anim.enabled = true;
             cupController.Anim.SetTrigger("CupJumpAndBounce");
-            StartCoroutine(SetInactiveAfterAnimation());
+            StartCoroutine(CustomerReviewSequence());
         }
     }
 
-    private IEnumerator SetInactiveAfterAnimation() {
+    private IEnumerator CustomerReviewSequence() {
         yield return new WaitForSeconds(cupJumpAnimationLength);
         cupController.teabagZone.SetContentsInactive();
-        // hack
-        yield return new WaitForSeconds(1);
+
+        // hack waitforseconds to reset animation
+        yield return new WaitForSeconds(0.2f);
         cupController.Anim.enabled = false;
         cup.transform.parent.gameObject.SetActive(false);
 
@@ -76,6 +77,8 @@ public class BellController : MonoBehaviour
         // PrintOrder(customerOrder);
         // Debug.Log(cupOrder.Equals(customerOrder));
 
+        //timing with drumroll
+        yield return new WaitForSeconds(0.8f);
         GameController.SharedInstance.dialogueManager.ShouldEnd = true;
         GameController.SharedInstance.dialogueManager.StartDialogue(new List<Dialogue> { customer.GenerateOrderComparisonText(cupController.GetOrder()) });
         GameController.SharedInstance.AdvanceLevel();

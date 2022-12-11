@@ -125,8 +125,8 @@ public class CustomerController : MonoBehaviour
         lighttea.Add("Can I get a cup of light tea? ");
 
         lightStr.Add("Just one tea bag is fine.\n");
-        mediumStr.Add("Make it a teeny bit stronger than usual.\n");
-        heavyStr.Add("Make it really really strong for me!\n");
+        mediumStr.Add("Make it a teeny bit stronger with 2 bags.\n");
+        heavyStr.Add("Make it really strong with 3 bags!\n");
 
         additives.Add("Can I also get ");
         honey.Add("a bit of honey");
@@ -245,7 +245,7 @@ public class CustomerController : MonoBehaviour
             }
             if (order.hasHoney != cupOrder.hasHoney)
             {
-                dialogue.Add(string.Format("I wanted {0}honey, but you gave me {1}.\n", order.hasHoney ? " " : "no " , cupOrder.hasHoney ? "honey" : "none"));
+                dialogue.Add(string.Format("I wanted {0}honey, but you gave me {1}.\n", order.hasHoney ? "" : "no " , cupOrder.hasHoney ? "honey" : "none"));
             }
             if (order.sugarCount != cupOrder.sugarCount)
             {
@@ -253,11 +253,11 @@ public class CustomerController : MonoBehaviour
             }
             if (order.hasMilk != cupOrder.hasMilk)
             {
-                dialogue.Add(string.Format("I wanted {0}milk, but you gave me {1}.\n", order.hasMilk ? " " : "no " , cupOrder.hasMilk ? "honey" : "none"));
+                dialogue.Add(string.Format("I wanted {0}milk, but you gave me {1}.\n", order.hasMilk ? "" : "no " , cupOrder.hasMilk ? "honey" : "none"));
             }
             if (order.hasOatMilk != cupOrder.hasOatMilk)
             {
-                dialogue.Add(string.Format("I wanted {0}oatmilk, but you gave me {1}.\n", order.hasOatMilk ? " " : "no ", cupOrder.hasOatMilk ? "oatmilk" : "none"));
+                dialogue.Add(string.Format("I wanted {0}oatmilk, but you gave me {1}.\n", order.hasOatMilk ? "" : "no ", cupOrder.hasOatMilk ? "oatmilk" : "none"));
             }
             if (order.hasSpoon && !cupOrder.hasSpoon)
             {
@@ -351,15 +351,15 @@ public class CustomerController : MonoBehaviour
                     },
                     new DialogueSentence {
                         sentence = "...\n",
-                        sentenceCharDelayInSec = 1f/2f,
+                        sentenceCharDelayInSec = 3f/4f,
                     },
                     new DialogueSentence {
                         sentence =  "...\n",
-                        sentenceCharDelayInSec = 1f/2f,
+                        sentenceCharDelayInSec = 3f/4f,
                     },
                     new DialogueSentence {
                         sentence =  "...\n",
-                        sentenceCharDelayInSec = 1f/2f,
+                        sentenceCharDelayInSec = 3f/4f,
                     },
                 },
             },

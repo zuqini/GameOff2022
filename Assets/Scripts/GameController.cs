@@ -52,10 +52,10 @@ public struct Order
             };
         } else if (difficulty == 2) {
             return new Order {
-                blackTea = teaType == 0 ? 1 : 0,
-                herbTea = teaType == 0 ? 1 : 0,
-                lightTea = teaType == 0 ? 1 : 0,
-                hasHoney = hasHoney,
+                blackTea = blackTea,
+                herbTea = herbTea,
+                lightTea = lightTea,
+                hasHoney = true,
                 hasMilk = false,
                 hasOatMilk = false,
                 sugarCount = 0,
@@ -63,13 +63,14 @@ public struct Order
                 hasWater = true,
             };
         } else if (difficulty == 3) {
+            var isMilk = Utils.Random.Next(2) == 0;
             return new Order {
                 blackTea = teaType == 0 ? 1 : 0,
-                herbTea = teaType == 0 ? 1 : 0,
-                lightTea = teaType == 0 ? 1 : 0,
+                herbTea = teaType == 1 ? 1 : 0,
+                lightTea = teaType == 2 ? 1 : 0,
                 hasHoney = false,
-                hasMilk = hasMilk,
-                hasOatMilk = hasOatMilk,
+                hasMilk = isMilk,
+                hasOatMilk = !isMilk,
                 sugarCount = 0,
                 hasSpoon = false,
                 hasWater = true,
@@ -167,7 +168,7 @@ public class GameController : MonoBehaviour
     public void AdvanceLevel()
     {
         level++;
-        difficultyLevel = 1 + level / 2;
+        difficultyLevel = level;
         Debug.Log(string.Format("level: {0}, difficulty: {1}", level, difficultyLevel));
         levelUIController.GenerateCurrentLevel();
     }
