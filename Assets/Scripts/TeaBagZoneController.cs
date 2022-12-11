@@ -49,7 +49,7 @@ public class TeaBagZoneController : MonoBehaviour
         var y = teaBagConstrainer.Find("y").position.y;
         teabags.ForEach(teabag => {
             var holder = teabag.holder;
-            var holderPosition = new Vector2(Mathf.Max(Mathf.Min(holder.position.x, right), left), Mathf.Max(Mathf.Min(holder.position.y, y+1), y));
+            var holderPosition = new Vector2(Mathf.Max(Mathf.Min(holder.position.x, right), left), Mathf.Max(Mathf.Min(holder.position.y, y+2), y));
 
             holder.transform.position = holderPosition;
             teabag.Body.MovePosition(transform.position);
